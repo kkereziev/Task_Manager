@@ -1,0 +1,9 @@
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.Entities\bin\Debug\netstandard2.0\Task.Manager.Entities.deps.json
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.Entities\bin\Debug\netstandard2.0\Task.Manager.Entities.dll
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.Entities\obj\Debug\netstandard2.0\Task.Manager.Entities.csprojAssemblyReference.cache
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.Entities\obj\Debug\netstandard2.0\Task.Manager.Entities.AssemblyInfoInputs.cache
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.Entities\obj\Debug\netstandard2.0\Task.Manager.Entities.AssemblyInfo.cs
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.Entities\bin\Debug\netstandard2.0\Task.Manager.Entities.pdb
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.Entities\obj\Debug\netstandard2.0\Task.Manager.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.Entities\obj\Debug\netstandard2.0\Task.Manager.Entities.dll
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.Entities\obj\Debug\netstandard2.0\Task.Manager.Entities.pdb

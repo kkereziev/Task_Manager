@@ -1,0 +1,9 @@
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.DTO\bin\Debug\netstandard2.0\Task.Manager.DTO.deps.json
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.DTO\bin\Debug\netstandard2.0\Task.Manager.DTO.dll
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.DTO\obj\Debug\netstandard2.0\Task.Manager.DTO.csprojAssemblyReference.cache
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.DTO\obj\Debug\netstandard2.0\Task.Manager.DTO.AssemblyInfoInputs.cache
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.DTO\obj\Debug\netstandard2.0\Task.Manager.DTO.AssemblyInfo.cs
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.DTO\bin\Debug\netstandard2.0\Task.Manager.DTO.pdb
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.DTO\obj\Debug\netstandard2.0\Task.Manager.DTO.csproj.CoreCompileInputs.cache
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.DTO\obj\Debug\netstandard2.0\Task.Manager.DTO.dll
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.DTO\obj\Debug\netstandard2.0\Task.Manager.DTO.pdb
