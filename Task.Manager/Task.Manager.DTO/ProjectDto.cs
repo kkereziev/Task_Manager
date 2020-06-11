@@ -16,6 +16,8 @@ namespace Task.Manager.DTO
         [StringLength(250)]
         public string Description { get; set; }
 
+        public int[] WorkersIds { get; set; }
+
         public ICollection<ProjectWorkerDto> Workers { get; set; }
 
         public ICollection<AssignmentDto> Assignments { get; set; }

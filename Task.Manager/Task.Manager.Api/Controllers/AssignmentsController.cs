@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,20 +17,26 @@ namespace Task.Manager.Api.Controllers
     public class AssignmentsController : ControllerBase
     {
         private readonly ManagerDbContext _context;
+        private readonly IMapper _mapper;
 
-        public AssignmentsController(ManagerDbContext context)
+        public AssignmentsController(ManagerDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Assignments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignments()
+        public async Task<ActionResult<IEnumerable<AssignmentDto>>> GetAssignments()
         {
-            return await _context.Assignments
+            var assignments = await _context.Assignments
                 .Include(p=>p.Project)
                 .Include(c=>c.Comments)
                 .ToListAsync();
+
+            var assignemntsDto = _mapper.Map<List<AssignmentDto>>(assignments);
+            
+            return assignemntsDto;
         }
 
         // GET: api/Assignments/5
@@ -46,39 +53,7 @@ namespace Task.Manager.Api.Controllers
                 return NotFound();
             }
 
-            var assignemntDto = new AssignmentDto()
-            {
-                Id = assignment.Id,
-                Title = assignment.Title,
-                Status = assignment.Status,
-                Description = assignment.Description,
-                CreatedOn = assignment.CreatedOn,
-                UpdatedOn = assignment.UpdatedOn,
-                Project = new ProjectDto()
-                {
-                    Id = assignment.Project.Id,
-                    Name = assignment.Project.Name,
-                },
-                Worker = new WorkerDto()
-                {
-                    Id = assignment.Worker.Id,
-                    Name = assignment.Worker.Name,
-                    Email = assignment.Worker.Email,
-                    Status = assignment.Worker.Status
-                },
-                Comments = assignment.Comments.Select(x=>new CommentDto()
-                {
-                    Description = x.Description,
-                    Assignment =  new AssignmentDto()
-                    {
-                        Id = x.Assignment.Id,
-                        Description = x.Assignment.Description,
-                        Title = x.Assignment.Title,
-                        Status = x.Assignment.Status
-                    }
-                }).ToList(),
-
-            };
+            var assignemntDto = _mapper.Map<AssignmentDto>(assignment);
 
             return assignemntDto;
         }
@@ -87,13 +62,17 @@ namespace Task.Manager.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAssignment(int id, Assignment assignment)
+        public async Task<IActionResult> PutAssignment(int id, AssignmentDto assignmentDto)
         {
+            var assignment = _mapper.Map<Assignment>(assignmentDto);
+            
             if (id != assignment.Id)
             {
                 return BadRequest();
             }
 
+            assignment.WorkerId = assignment.Worker.Id;
+            assignment.ProjectId = assignment.Project.Id;
             _context.Entry(assignment).State = EntityState.Modified;
 
             try
@@ -119,8 +98,9 @@ namespace Task.Manager.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Assignment>> PostAssignment(Assignment assignment)
+        public async Task<ActionResult<Assignment>> PostAssignment(AssignmentDto assignmentDto)
         {
+            var assignment = _mapper.Map<Assignment>(assignmentDto);
             _context.Assignments.Add(assignment);
             await _context.SaveChangesAsync();
 

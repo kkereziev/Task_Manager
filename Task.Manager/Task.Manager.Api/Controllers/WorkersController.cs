@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Task.Manager.Api.Data;
+using Task.Manager.DTO;
 using Task.Manager.Entities;
 
 namespace Task.Manager.Api.Controllers
@@ -15,17 +17,25 @@ namespace Task.Manager.Api.Controllers
     public class WorkersController : ControllerBase
     {
         private readonly ManagerDbContext _context;
+        private readonly IMapper _mapper;
 
-        public WorkersController(ManagerDbContext context)
+        public WorkersController(ManagerDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Workers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Worker>>> GetWorkers()
+        public async Task<ActionResult<IEnumerable<WorkerDto>>> GetWorkers()
         {
-            return await _context.Workers.ToListAsync();
+            var workers=await _context.Workers
+                .Include(p=>p.Projects)
+                .Include(a=>a.Assignments)
+                .ToListAsync();
+
+            var workersDto = _mapper.Map<List<WorkerDto>>(workers);
+            return workersDto;
         }
 
         // GET: api/Workers/5

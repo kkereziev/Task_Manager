@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Task.Manager.Api.Data;
+using Task.Manager.DTO;
 using Task.Manager.Entities;
 
 
@@ -16,46 +18,61 @@ namespace Task.Manager.Api.Controllers
     public class ProjectsController : ControllerBase
     {
         private readonly ManagerDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ProjectsController(ManagerDbContext context)
+        public ProjectsController(ManagerDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Projects
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
+        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjects()
         {
-            return await _context.Projects.ToListAsync();
+            var projects=await _context.Projects
+                .Include(w=>w.Workers)
+                .Include(a=>a.Assignments)
+                .ToListAsync();
+
+            var projectsDto = _mapper.Map<List<ProjectDto>>(projects);
+
+            return projectsDto;
         }
 
         // GET: api/Projects/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Project>> GetProject(int id)
+        public async Task<ActionResult<ProjectDto>> GetProject(int id)
         {
-            var project = await _context.Projects.FindAsync(id);
+            var project = await _context.Projects
+                .Include(w=>w.)
+                .Include(a=>a.Assignments)
+                .SingleOrDefaultAsync(x=>x.Id==id);
 
             if (project == null)
             {
                 return NotFound();
             }
+            var projectDto = _mapper.Map<ProjectDto>(project);
 
-            return project;
+            return projectDto;
         }
 
         // PUT: api/Projects/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProject(int id, Project project)
+        public async Task<IActionResult> PutProject(int id, ProjectDto project)
         {
             if (id != project.Id)
             {
                 return BadRequest();
             }
-
+            
             _context.Entry(project).State = EntityState.Modified;
 
+            _context.ProjectWorkers.RemoveRange(_context.ProjectWorkers.Where(x=>x.ProjectId==project.Id));
+            _context.ProjectWorkers.AddRange(project.WorkersIds.Select(x=>new ProjectWorker() {WorkerId = x,ProjectId = project.Id}));
             try
             {
                 await _context.SaveChangesAsync();
@@ -79,11 +96,14 @@ namespace Task.Manager.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Project>> PostProject(Project project)
+        public async Task<ActionResult<Project>> PostProject(ProjectDto projectDto)
         {
+            var project = _mapper.Map<Project>(projectDto);
             _context.Projects.Add(project);
             await _context.SaveChangesAsync();
 
+            _context.ProjectWorkers.RemoveRange(_context.ProjectWorkers.Where(x => x.ProjectId == projectDto.Id));
+            _context.ProjectWorkers.AddRange(projectDto.WorkersIds.Select(x => new ProjectWorker() { WorkerId = x, ProjectId = projectDto.Id }));
             return CreatedAtAction("GetProject", new { id = project.Id }, project);
         }
 

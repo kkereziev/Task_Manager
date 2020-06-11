@@ -19,7 +19,7 @@ namespace Task.Manager.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Task.Manager.Api.Data.Assignment", b =>
+            modelBuilder.Entity("Task.Manager.Entities.Assignment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -61,7 +61,7 @@ namespace Task.Manager.Api.Migrations
                     b.ToTable("Assignments");
                 });
 
-            modelBuilder.Entity("Task.Manager.Api.Data.Comment", b =>
+            modelBuilder.Entity("Task.Manager.Entities.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -82,7 +82,7 @@ namespace Task.Manager.Api.Migrations
                     b.ToTable("Comment");
                 });
 
-            modelBuilder.Entity("Task.Manager.Api.Data.Project", b =>
+            modelBuilder.Entity("Task.Manager.Entities.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,7 +103,7 @@ namespace Task.Manager.Api.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("Task.Manager.Api.Data.ProjectWorker", b =>
+            modelBuilder.Entity("Task.Manager.Entities.ProjectWorker", b =>
                 {
                     b.Property<int>("WorkerId")
                         .HasColumnType("int");
@@ -115,10 +115,10 @@ namespace Task.Manager.Api.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectWorker");
+                    b.ToTable("ProjectWorkers");
                 });
 
-            modelBuilder.Entity("Task.Manager.Api.Data.Role", b =>
+            modelBuilder.Entity("Task.Manager.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -134,7 +134,7 @@ namespace Task.Manager.Api.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("Task.Manager.Api.Data.Worker", b =>
+            modelBuilder.Entity("Task.Manager.Entities.Worker", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -167,48 +167,48 @@ namespace Task.Manager.Api.Migrations
                     b.ToTable("Workers");
                 });
 
-            modelBuilder.Entity("Task.Manager.Api.Data.Assignment", b =>
+            modelBuilder.Entity("Task.Manager.Entities.Assignment", b =>
                 {
-                    b.HasOne("Task.Manager.Api.Data.Project", "Project")
+                    b.HasOne("Task.Manager.Entities.Project", "Project")
                         .WithMany("Assignments")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Task.Manager.Api.Data.Worker", "Worker")
+                    b.HasOne("Task.Manager.Entities.Worker", "Worker")
                         .WithMany("Assignments")
                         .HasForeignKey("WorkerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Task.Manager.Api.Data.Comment", b =>
+            modelBuilder.Entity("Task.Manager.Entities.Comment", b =>
                 {
-                    b.HasOne("Task.Manager.Api.Data.Assignment", "Assignment")
+                    b.HasOne("Task.Manager.Entities.Assignment", "Assignment")
                         .WithMany("Comments")
                         .HasForeignKey("AssignmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Task.Manager.Api.Data.ProjectWorker", b =>
+            modelBuilder.Entity("Task.Manager.Entities.ProjectWorker", b =>
                 {
-                    b.HasOne("Task.Manager.Api.Data.Project", "Project")
+                    b.HasOne("Task.Manager.Entities.Project", "Project")
                         .WithMany("Workers")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Task.Manager.Api.Data.Worker", "Worker")
+                    b.HasOne("Task.Manager.Entities.Worker", "Worker")
                         .WithMany("Projects")
                         .HasForeignKey("WorkerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Task.Manager.Api.Data.Worker", b =>
+            modelBuilder.Entity("Task.Manager.Entities.Worker", b =>
                 {
-                    b.HasOne("Task.Manager.Api.Data.Role", "Role")
+                    b.HasOne("Task.Manager.Entities.Role", "Role")
                         .WithMany("Workers")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)

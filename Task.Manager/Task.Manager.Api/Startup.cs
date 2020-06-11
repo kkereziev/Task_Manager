@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Task.Manager.Api.Data;
 
 namespace Task.Manager.Api
@@ -34,7 +35,7 @@ namespace Task.Manager.Api
             services.AddControllers();
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 );
         }
 

@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ajxOz41xAcYxxukWgyc8JY4N4wQ7i9+oxVdn28kJcDv/9MfX0fYGAYQ+z0AjCLwCok35TdURUYy+XTEzFYzGVA==",
+  "dgSpecHash": "gtGA3DHSeAkNPk2usIwRkEqypCaAPLlF2x+9RQuQ4R1PUjrxzS8+NmJbUAc9pOgN3dZQPA1eOrenSm/YIO/YYA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Krum\\Desktop\\Task.Manager\\Task.Manager\\Task.Manager.Api\\Task.Manager.Api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Krum\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
+    "C:\\Users\\Krum\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\Krum\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.5\\microsoft.aspnetcore.jsonpatch.3.1.5.nupkg.sha512",
     "C:\\Users\\Krum\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.5\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.5.nupkg.sha512",
     "C:\\Users\\Krum\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

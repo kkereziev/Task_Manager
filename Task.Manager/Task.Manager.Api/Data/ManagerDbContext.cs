@@ -65,5 +65,6 @@ namespace Task.Manager.Api.Data
 
         public DbSet<Worker> Workers { get; set; }
 
+        public DbSet<ProjectWorker> ProjectWorkers { get; set; }
     }
 }
