@@ -45,7 +45,7 @@ namespace Task.Manager.Api.Controllers
         public async Task<ActionResult<ProjectDto>> GetProject(int id)
         {
             var project = await _context.Projects
-                .Include(w=>w.)
+                .Include(w=>w.Workers)
                 .Include(a=>a.Assignments)
                 .SingleOrDefaultAsync(x=>x.Id==id);
 

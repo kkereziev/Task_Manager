@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Task.Manager.Api\Task.Manager.Api.csproj" />
     <ProjectReference Include="..\Task.Manager.DTO\Task.Manager.DTO.csproj" />
     <ProjectReference Include="..\Task.Manager.Entities\Task.Manager.Entities.csproj" />
   </ItemGroup>

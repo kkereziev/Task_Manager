@@ -14,6 +14,8 @@ namespace Task.Manager.Entities
         [StringLength(250)]
         public string Description { get; set; }
 
+        public DateTime AddedOn { get; set; }
+
         public int AssignmentId { get; set; }
 
         public Assignment Assignment { get; set; }

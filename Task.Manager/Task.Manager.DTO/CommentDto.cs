@@ -11,6 +11,8 @@ namespace Task.Manager.DTO
 
         [StringLength(250)]
         public string Description { get; set; }
+        
+        public DateTime AddedOn { get; set; }
 
         public AssignmentDto Assignment { get; set; }
     }

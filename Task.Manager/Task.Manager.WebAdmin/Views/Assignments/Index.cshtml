@@ -7,19 +7,19 @@
 
 <table class="table table-bordered table-striped table-hover">
     <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Status</th>
-            <th>Project</th>
-            <th>Worker</th>
-            <th>Created On</th>
-            <th>Updated On</th>
-        </tr>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Project</th>
+        <th>Worker</th>
+        <th>Created On</th>
+        <th>Updated On</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var assignment in Model)
-        {
+    @foreach (var assignment in Model)
+    {
         <tr>
             <td>@assignment.Title</td>
             <td><a asp-action="Get" asp-route-id="@assignment.Id">@assignment.Title</a></td>
@@ -36,7 +36,7 @@
                 </a>
             </td>
         </tr>   
-        }
+    }
     </tbody>
 </table>
 

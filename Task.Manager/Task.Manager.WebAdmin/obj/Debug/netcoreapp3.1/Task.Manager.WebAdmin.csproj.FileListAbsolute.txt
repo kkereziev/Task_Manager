@@ -117,3 +117,4 @@ C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\bin\Debug\
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Task.Manager.WebAdmin.csproj.CoreCompileInputs.cache
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Task.Manager.WebAdmin.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Task.Manager.WebAdmin.MvcApplicationPartsAssemblyInfo.cs
