@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Task.Manager.DTO;
 using Task.Manager.Entities;
 
 namespace Task.Manager.AdminWeb.Controllers
@@ -41,9 +43,40 @@ namespace Task.Manager.AdminWeb.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            using (var client = new HttpClient())
+            {
+                var assignmentsUrl = $"{baseUrl}/api/assignments/{id}";
+                var assignmentsResponse = await client.GetStringAsync(assignmentsUrl);
+                var assignment = JsonConvert.DeserializeObject<AssignmentDto>(assignmentsResponse);
+                return View(assignment);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(AssignmentDto assignmentDto)
+        {
+            using (var client = new HttpClient())
+            {
+                var assignmentsUrl = $"{baseUrl}/api/assignments/{assignmentDto.Id}";
+                var assignmentDtoString = JsonConvert.SerializeObject(assignmentDto);
+                var assignmentsResponse = await client.PutAsync(assignmentsUrl, new StringContent(assignmentDtoString,Encoding.UTF8, "application/json"));
+
+                if (assignmentsResponse.IsSuccessStatusCode)
+                {
+                    assignmentDto =
+                        JsonConvert.DeserializeObject<AssignmentDto>(
+                            await assignmentsResponse.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty,"Update failed");
+                }
+               
+                return View(assignmentDto);
+            }
         }
 
         //POST: Assignment

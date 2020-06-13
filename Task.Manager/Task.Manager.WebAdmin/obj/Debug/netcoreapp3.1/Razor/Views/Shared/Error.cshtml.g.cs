@@ -40,8 +40,15 @@ using Task.Manager.Api;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\Views\_ViewImports.cshtml"
+using Task.Manager.DTO;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d6a5625cc8fb4476f348b0fe9041c550465d8bf9", @"/Views/Shared/Error.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e8954d8a7a77e6f3bf7168c8a11dce50927f9178", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"40d0224ab1a1e33d005e7aa2b20cf65a15984625", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Error : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ErrorViewModel>
     {
         #pragma warning disable 1998

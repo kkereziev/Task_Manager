@@ -31,6 +31,7 @@ namespace Task.Manager.Api.Controllers
         {
             var workers=await _context.Workers
                 .Include(p=>p.Project)
+                .Include(a=>a.Assignments)
                 .ToListAsync();
 
             var workersDto = _mapper.Map<List<WorkerDto>>(workers);

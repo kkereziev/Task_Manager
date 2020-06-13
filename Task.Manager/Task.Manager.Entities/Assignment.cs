@@ -24,9 +24,13 @@ namespace Task.Manager.Entities
 
         public DateTime UpdatedOn { get; set; } = DateTime.Now;
 
-        public int? ProjectId { get; set; }
+        public int ProjectId { get; set; }
+
+        public int WorkerId { get; set; }
 
         public Project Project { get; set; }
+
+        public Worker Worker { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
     }

@@ -47,6 +47,7 @@ namespace Task.Manager.Api.Controllers
             var assignment = await _context.Assignments
                 .Include(p => p.Project)
                 .Include(c => c.Comments)
+                .Include(w=>w.Worker)
                 .SingleOrDefaultAsync(x=>x.Id==id);
 
             if (assignment == null)
@@ -73,6 +74,7 @@ namespace Task.Manager.Api.Controllers
             }
 
             assignment.ProjectId = assignment.Project.Id;
+            assignment.WorkerId = assignment.Worker.Id;
             _context.Entry(assignment).State = EntityState.Modified;
 
             try

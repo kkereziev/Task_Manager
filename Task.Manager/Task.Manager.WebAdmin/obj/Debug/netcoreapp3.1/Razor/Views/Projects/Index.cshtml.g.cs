@@ -40,8 +40,15 @@ using Task.Manager.Api;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\Views\_ViewImports.cshtml"
+using Task.Manager.DTO;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d04cb2374505cbcc19894c5c1b8c6f4195e0ba21", @"/Views/Projects/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e8954d8a7a77e6f3bf7168c8a11dce50927f9178", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"40d0224ab1a1e33d005e7aa2b20cf65a15984625", @"/Views/_ViewImports.cshtml")]
     public class Views_Projects_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<Project>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Get", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -97,7 +104,7 @@ Write(ViewData["Title"]);
 #line hidden
 #nullable disable
             WriteLiteral("            <tr>\r\n                <td>");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d04cb2374505cbcc19894c5c1b8c6f4195e0ba215500", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d04cb2374505cbcc19894c5c1b8c6f4195e0ba215701", async() => {
 #nullable restore
 #line 19 "C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\Views\Projects\Index.cshtml"
                                                                Write(projects.Name);
@@ -142,7 +149,7 @@ Write(ViewData["Title"]);
 #line hidden
 #nullable disable
             WriteLiteral("</td>\r\n                <td>\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d04cb2374505cbcc19894c5c1b8c6f4195e0ba218231", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d04cb2374505cbcc19894c5c1b8c6f4195e0ba218432", async() => {
                 WriteLiteral("\r\n                        <i class=\"glyphicon glyphicon-edit\"></i>\r\n                    ");
             }
             );
