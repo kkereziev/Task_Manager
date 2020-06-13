@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -43,6 +44,24 @@ namespace Task.Manager.AdminWeb.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             return View();
+        }
+
+        //POST: Assignment
+        public ActionResult Create()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Assignment assignment)
+        {
+            using (var client=new HttpClient())
+            {
+                client.BaseAddress=new Uri("");
+                //var postAssignemnt = client.PostAsync("",assignment);
+            }
+            return View(assignment);
         }
     }
 }

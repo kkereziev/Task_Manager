@@ -16,7 +16,7 @@ namespace Task.Manager.Entities
 
         public DateTime AddedOn { get; set; }
 
-        public int AssignmentId { get; set; }
+        public int? AssignmentId { get; set; }
 
         public Assignment Assignment { get; set; }
     }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "jfCEtHWJTLSisz9DVVRboRiNidD1hKC4VL67+i/TJAF0j2C89R8j82wurpopiuvETkzGc5mJJ8iCiE0x4aVc5w==",
+  "dgSpecHash": "sZOHtZ0hg6SVzE0uhuPGD4ieMcYIYP9py5mUYZ+mbs01+ntHEJLbCbIddsXP82eoyVvxQ6fVpwdAP8kRxP27Tw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Krum\\Desktop\\Task.Manager\\Task.Manager\\Task.Manager.WebAdmin\\Task.Manager.WebAdmin.csproj",
   "expectedPackageFiles": [
@@ -25,8 +25,10 @@
     "C:\\Users\\Krum\\.nuget\\packages\\microsoft.entityframeworkcore\\3.1.5\\microsoft.entityframeworkcore.3.1.5.nupkg.sha512",
     "C:\\Users\\Krum\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\3.1.5\\microsoft.entityframeworkcore.abstractions.3.1.5.nupkg.sha512",
     "C:\\Users\\Krum\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\3.1.5\\microsoft.entityframeworkcore.analyzers.3.1.5.nupkg.sha512",
+    "C:\\Users\\Krum\\.nuget\\packages\\microsoft.entityframeworkcore.design\\3.1.4\\microsoft.entityframeworkcore.design.3.1.4.nupkg.sha512",
     "C:\\Users\\Krum\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\3.1.5\\microsoft.entityframeworkcore.relational.3.1.5.nupkg.sha512",
     "C:\\Users\\Krum\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\3.1.5\\microsoft.entityframeworkcore.sqlserver.3.1.5.nupkg.sha512",
+    "C:\\Users\\Krum\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\3.1.4\\microsoft.entityframeworkcore.tools.3.1.4.nupkg.sha512",
     "C:\\Users\\Krum\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\3.1.5\\microsoft.extensions.caching.abstractions.3.1.5.nupkg.sha512",
     "C:\\Users\\Krum\\.nuget\\packages\\microsoft.extensions.caching.memory\\3.1.5\\microsoft.extensions.caching.memory.3.1.5.nupkg.sha512",
     "C:\\Users\\Krum\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.5\\microsoft.extensions.configuration.3.1.5.nupkg.sha512",

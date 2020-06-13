@@ -2,7 +2,7 @@
 
 namespace Task.Manager.Api.Migrations
 {
-    public partial class Refactor_2 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

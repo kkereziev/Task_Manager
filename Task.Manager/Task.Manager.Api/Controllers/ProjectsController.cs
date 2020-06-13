@@ -71,8 +71,7 @@ namespace Task.Manager.Api.Controllers
             
             _context.Entry(project).State = EntityState.Modified;
 
-            _context.ProjectWorkers.RemoveRange(_context.ProjectWorkers.Where(x=>x.ProjectId==project.Id));
-            _context.ProjectWorkers.AddRange(project.WorkersIds.Select(x=>new ProjectWorker() {WorkerId = x,ProjectId = project.Id}));
+           
             try
             {
                 await _context.SaveChangesAsync();
@@ -102,8 +101,7 @@ namespace Task.Manager.Api.Controllers
             _context.Projects.Add(project);
             await _context.SaveChangesAsync();
 
-            _context.ProjectWorkers.RemoveRange(_context.ProjectWorkers.Where(x => x.ProjectId == projectDto.Id));
-            _context.ProjectWorkers.AddRange(projectDto.WorkersIds.Select(x => new ProjectWorker() { WorkerId = x, ProjectId = projectDto.Id }));
+          
             return CreatedAtAction("GetProject", new { id = project.Id }, project);
         }
 

@@ -20,7 +20,7 @@ namespace Task.Manager.WebAdmin.Controllers
                 var projectsUrl = $"{baseUrl}api/projects";
                 var projectsResponse = await client.GetStringAsync(projectsUrl);
 
-                var projects = JsonConvert.DeserializeObject<List<Assignment>>(projectsResponse);
+                var projects = JsonConvert.DeserializeObject<List<Project>>(projectsResponse);
 
                 return View(projects);
             }
@@ -33,7 +33,7 @@ namespace Task.Manager.WebAdmin.Controllers
                 var projectUrl = $"{baseUrl}/api/projects/{id}";
                 var projectResponse = await client.GetStringAsync(projectUrl);
 
-                var project = JsonConvert.DeserializeObject<Assignment>(projectResponse);
+                var project = JsonConvert.DeserializeObject<Project>(projectResponse);
 
                 return View(project);
             }

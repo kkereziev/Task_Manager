@@ -20,8 +20,6 @@ namespace Task.Manager.DTO
 
         public RoleDto Role { get; set; }
 
-        public ICollection<ProjectWorkerDto> Projects { get; set; }
-
-        public ICollection<AssignmentDto> Assignments { get; set; }
+        public ProjectDto Project { get; set; }
     }
 }

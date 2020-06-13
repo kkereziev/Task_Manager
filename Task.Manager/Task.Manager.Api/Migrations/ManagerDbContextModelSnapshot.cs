@@ -33,7 +33,7 @@ namespace Task.Manager.Api.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
-                    b.Property<int>("ProjectId")
+                    b.Property<int?>("ProjectId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -49,14 +49,9 @@ namespace Task.Manager.Api.Migrations
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("WorkerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProjectId");
-
-                    b.HasIndex("WorkerId");
 
                     b.ToTable("Assignments");
                 });
@@ -68,7 +63,10 @@ namespace Task.Manager.Api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AssignmentId")
+                    b.Property<DateTime>("AddedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("AssignmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -103,21 +101,6 @@ namespace Task.Manager.Api.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("Task.Manager.Entities.ProjectWorker", b =>
-                {
-                    b.Property<int>("WorkerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("WorkerId", "ProjectId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProjectWorkers");
-                });
-
             modelBuilder.Entity("Task.Manager.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -150,7 +133,10 @@ namespace Task.Manager.Api.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
-                    b.Property<int>("RoleId")
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -162,6 +148,8 @@ namespace Task.Manager.Api.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
+                    b.HasIndex("ProjectId");
+
                     b.HasIndex("RoleId");
 
                     b.ToTable("Workers");
@@ -171,48 +159,26 @@ namespace Task.Manager.Api.Migrations
                 {
                     b.HasOne("Task.Manager.Entities.Project", "Project")
                         .WithMany("Assignments")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Task.Manager.Entities.Worker", "Worker")
-                        .WithMany("Assignments")
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("Task.Manager.Entities.Comment", b =>
                 {
                     b.HasOne("Task.Manager.Entities.Assignment", "Assignment")
                         .WithMany("Comments")
-                        .HasForeignKey("AssignmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Task.Manager.Entities.ProjectWorker", b =>
-                {
-                    b.HasOne("Task.Manager.Entities.Project", "Project")
-                        .WithMany("Workers")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Task.Manager.Entities.Worker", "Worker")
-                        .WithMany("Projects")
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AssignmentId");
                 });
 
             modelBuilder.Entity("Task.Manager.Entities.Worker", b =>
                 {
+                    b.HasOne("Task.Manager.Entities.Project", "Project")
+                        .WithMany("Workers")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Task.Manager.Entities.Role", "Role")
                         .WithMany("Workers")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoleId");
                 });
 #pragma warning restore 612, 618
         }

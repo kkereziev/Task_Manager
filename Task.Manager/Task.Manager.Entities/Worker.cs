@@ -19,12 +19,12 @@ namespace Task.Manager.Entities
         [Required]
         public string Status { get; set; }
         
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
+
+        public int? ProjectId { get; set; }
 
         public Role Role { get; set; }
 
-        public ICollection<ProjectWorker> Projects { get; set; }
-
-        public ICollection<Assignment> Assignments { get; set; }
+        public Project Project { get; set; }
     }
 }

@@ -24,8 +24,6 @@ namespace Task.Manager.DTO
 
         public DateTime UpdatedOn { get; set; } = DateTime.Now;
 
-        public WorkerDto Worker { get; set; }
-
         public ProjectDto Project { get; set; }
 
         public ICollection<CommentDto> Comments { get; set; }

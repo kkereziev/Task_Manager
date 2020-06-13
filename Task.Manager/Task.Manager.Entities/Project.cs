@@ -18,7 +18,7 @@ namespace Task.Manager.Entities
         [StringLength(250)]
         public string Description { get; set; }
 
-        public ICollection<ProjectWorker> Workers { get; set; }
+        public ICollection<Worker> Workers { get; set; }
 
         public ICollection<Assignment> Assignments { get; set; }
     }

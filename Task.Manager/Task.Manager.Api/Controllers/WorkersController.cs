@@ -30,8 +30,7 @@ namespace Task.Manager.Api.Controllers
         public async Task<ActionResult<IEnumerable<WorkerDto>>> GetWorkers()
         {
             var workers=await _context.Workers
-                .Include(p=>p.Projects)
-                .Include(a=>a.Assignments)
+                .Include(p=>p.Project)
                 .ToListAsync();
 
             var workersDto = _mapper.Map<List<WorkerDto>>(workers);

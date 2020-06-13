@@ -8,28 +8,16 @@
 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th>Title</th>
+            <th>Name</th>
             <th>Description</th>
-            <th>Status</th>
-            <th>Project</th>
-            <th>Worker</th>
-            <th>Created On</th>
-            <th>Updated On</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var projects in Model)
         {
             <tr>
-                <td>@projects.Title</td>
-                <td><a asp-action="Get" asp-route-id="@projects.Id">@projects.Title</a></td>
-                <td>@projects.Status</td>
-                <td>@projects.Project.Name</td>
-                <td>
-                    <a href="#" class="worker-name">@projects.Project.Description</a>
-                </td>     
-                <td>@projects.CreatedOn</td>
-                <td>@projects.UpdatedOn</td>
+                <td><a asp-action="Get" asp-route-id="@projects.Id">@projects.Name</a></td>
+                <td>@projects.Description</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@projects.Id" class="btn btn-success">
                         <i class="glyphicon glyphicon-edit"></i>

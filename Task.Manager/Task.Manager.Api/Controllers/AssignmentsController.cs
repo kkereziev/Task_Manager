@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -71,7 +72,6 @@ namespace Task.Manager.Api.Controllers
                 return BadRequest();
             }
 
-            assignment.WorkerId = assignment.Worker.Id;
             assignment.ProjectId = assignment.Project.Id;
             _context.Entry(assignment).State = EntityState.Modified;
 
