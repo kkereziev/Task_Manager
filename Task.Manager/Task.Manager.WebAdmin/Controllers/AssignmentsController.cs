@@ -35,7 +35,7 @@ namespace Task.Manager.AdminWeb.Controllers
         {
             using (var client=new HttpClient())
             {
-                var assignmentsUrl = $"{baseUrl}/api/assignments/{id}";
+                var assignmentsUrl = $"{baseUrl}api/assignments/{id}";
                 var assignmentsResponse = await client.GetStringAsync(assignmentsUrl);
 
                 var assignments = JsonConvert.DeserializeObject<Assignment>(assignmentsResponse);
@@ -50,24 +50,24 @@ namespace Task.Manager.AdminWeb.Controllers
             using (var client = new HttpClient())
             {
                 //Assignment
-                var assignmentsUrl = $"{baseUrl}/api/assignments/{id}";
+                var assignmentsUrl = $"{baseUrl}api/assignments/{id}";
                 var assignmentsResponse = await client.GetStringAsync(assignmentsUrl);
                 var assignment = JsonConvert.DeserializeObject<AssignmentDto>(assignmentsResponse);
                 
                 //Projects
-                var projectsUrl = $"{baseUrl}/api/projects";
+                var projectsUrl = $"{baseUrl}api/projects";
                 var projectsResponse = await client.GetStringAsync(projectsUrl);
                 var projects = JsonConvert.DeserializeObject<List<ProjectDto>>(projectsResponse);
                 ViewBag.Projects = new SelectList(projects, "Id", "Name", assignment.Project.Id);
 
                 //Workers
-                var workersUrl = $"{baseUrl}/api/workers";
+                var workersUrl = $"{baseUrl}api/workers";
                 var workersResponse = await client.GetStringAsync(workersUrl);
                 var workers = JsonConvert.DeserializeObject<List<WorkerDto>>(workersResponse);
                 ViewBag.Workers = new SelectList(workers, "Id", "Name", assignment.Worker.Id);
 
                 //Comments
-                var commentsUrl = $"{baseUrl}/api/comments";
+                var commentsUrl = $"{baseUrl}api/comments";
                 var commentsResponse = await client.GetStringAsync(commentsUrl);
                 var comments = JsonConvert.DeserializeObject<List<CommentDto>>(commentsResponse);
                 ViewBag.Comments = new SelectList(comments, "Id", "Name", assignment.Comments.Select(x=>x.Id));
@@ -80,7 +80,7 @@ namespace Task.Manager.AdminWeb.Controllers
         {
             using (var client = new HttpClient())
             {
-                var assignmentsUrl = $"{baseUrl}/api/assignments/{assignmentDto.Id}";
+                var assignmentsUrl = $"{baseUrl}api/assignments/{assignmentDto.Id}";
                 var assignmentDtoString = JsonConvert.SerializeObject(assignmentDto);
                 var assignmentsResponse = await client.PutAsync(assignmentsUrl, new StringContent(assignmentDtoString,Encoding.UTF8, "application/json"));
 
