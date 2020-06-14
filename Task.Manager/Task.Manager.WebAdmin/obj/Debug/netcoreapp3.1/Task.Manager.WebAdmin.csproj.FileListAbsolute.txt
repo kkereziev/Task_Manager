@@ -158,3 +158,5 @@ C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\bin\Debug\
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Task.Manager.WebAdmin.csproj.CoreCompileInputs.cache
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Task.Manager.WebAdmin.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Task.Manager.WebAdmin.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Projects\Get.cshtml.g.cs
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Workers\Edit.cshtml.g.cs

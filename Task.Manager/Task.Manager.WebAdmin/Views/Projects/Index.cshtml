@@ -1,31 +1,37 @@
-﻿@model List<Project>
+﻿@model List<ProjectDto>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Projects";
 }
 
-<h1>@ViewData["Title"]</h1>
 
+<html>
+<head>
+    <h1>@ViewData["Title"]</h1>
+</head>
+<body>
 <table class="table table-bordered table-striped table-hover">
     <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-        </tr>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var projects in Model)
-        {
-            <tr>
-                <td><a asp-action="Get" asp-route-id="@projects.Id">@projects.Name</a></td>
-                <td>@projects.Description</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@projects.Id" class="btn btn-success">
-                        <i class="glyphicon glyphicon-edit"></i>
-                    </a>
-                </td>
-            </tr>
-
-        }
+    @foreach (var projects in Model)
+    {
+        <tr>
+            <td><a asp-action="Get" asp-route-id="@projects.Id">@projects.Name</a></td>
+            <td>@projects.Description</td>
+            @*<td>
+                <a asp-action="Edit" asp-route-id="@projects.Id" class="btn btn-success">
+                    <i class="glyphicon glyphicon-edit"></i>
+                    Промени
+                </a>
+            </td>*@
+        </tr>
+    }
     </tbody>
 </table>
+</body>
+</html>
 

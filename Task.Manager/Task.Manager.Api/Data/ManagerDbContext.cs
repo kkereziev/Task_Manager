@@ -28,7 +28,7 @@ namespace Task.Manager.Api.Data
             {
                 w.HasIndex(w => w.Name)
                     .IsUnique();
-                w.HasOne(r => r.Role).WithMany(w => w.Workers).HasForeignKey(w => w.RoleId);
+                //w.HasOne(r => r.Role).WithMany(w => w.Workers).HasForeignKey(w => w.RoleId);
                 w.HasOne(p => p.Project).WithMany(p => p.Workers).HasForeignKey(w => w.ProjectId);
                 w.HasMany(w => w.Assignments).WithOne(w => w.Worker).HasForeignKey(w => w.WorkerId);
                 w.HasIndex(a => a.Name).IsUnique();

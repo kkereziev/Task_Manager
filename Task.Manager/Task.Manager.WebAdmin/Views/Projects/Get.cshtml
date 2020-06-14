@@ -1,0 +1,66 @@
+﻿@using System.Security.Cryptography.X509Certificates
+@model ProjectDto
+@{
+    ViewData["Title"] = "Get";
+}
+<a style="float:right" class="btn btn-info" asp-action="Edit" asp-route-id="@Model.Id">Редактирай проекта</a>
+<h1 style="text-align: center">@Model.Name</h1>
+
+<div class="form-group shadow-textarea">
+    <label for="exampleFormControlTextarea6">Description</label>
+    <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" >@Model.Description</textarea>
+</div>
+<h2>Workers</h2>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var worker in Model.Workers)
+    {
+        <tr>
+            <td><a asp-action="Get" asp-route-id="@worker.Id">@worker.Name</a></td>
+            <td>@worker.Email</td>
+            <td>@worker.Role.Name</td>
+            <td>@worker.Status</td>
+            <td>
+                @*<a asp-controller="Workers" asp-action="Edit" asp-route-id="@worker.Id" class="btn btn-success">
+                    <i class="glyphicon glyphicon-edit"></i>
+                    Промени
+                </a>*@
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h2>Tasks</h2>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>UpdatedOn</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var assignment in Model.Assignments)
+    {
+        <tr>
+            <td><a asp-controller="Assignments" asp-action="Get" asp-route-id="@assignment.Id">@assignment.Title</a></td>
+            <td>@assignment.UpdatedOn</td>
+            <td>
+                <a asp-controller="Assignments" asp-action="Edit" asp-route-id="@assignment.Id" class="btn btn-success">
+                    <i class="glyphicon glyphicon-edit"></i>
+                    Промени
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+

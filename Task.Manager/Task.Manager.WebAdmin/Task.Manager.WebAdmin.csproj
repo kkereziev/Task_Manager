@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Task.Manager.Entities\Task.Manager.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Workers\" />
-  </ItemGroup>
-
 </Project>

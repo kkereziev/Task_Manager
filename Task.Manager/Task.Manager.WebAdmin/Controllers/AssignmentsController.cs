@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Task.Manager.DTO;
@@ -48,9 +49,28 @@ namespace Task.Manager.AdminWeb.Controllers
         {
             using (var client = new HttpClient())
             {
+                //Assignment
                 var assignmentsUrl = $"{baseUrl}/api/assignments/{id}";
                 var assignmentsResponse = await client.GetStringAsync(assignmentsUrl);
                 var assignment = JsonConvert.DeserializeObject<AssignmentDto>(assignmentsResponse);
+                
+                //Projects
+                var projectsUrl = $"{baseUrl}/api/projects";
+                var projectsResponse = await client.GetStringAsync(projectsUrl);
+                var projects = JsonConvert.DeserializeObject<List<ProjectDto>>(projectsResponse);
+                ViewBag.Projects = new SelectList(projects, "Id", "Name", assignment.Project.Id);
+
+                //Workers
+                var workersUrl = $"{baseUrl}/api/workers";
+                var workersResponse = await client.GetStringAsync(workersUrl);
+                var workers = JsonConvert.DeserializeObject<List<WorkerDto>>(workersResponse);
+                ViewBag.Workers = new SelectList(workers, "Id", "Name", assignment.Worker.Id);
+
+                //Comments
+                var commentsUrl = $"{baseUrl}/api/comments";
+                var commentsResponse = await client.GetStringAsync(commentsUrl);
+                var comments = JsonConvert.DeserializeObject<List<CommentDto>>(commentsResponse);
+                ViewBag.Comments = new SelectList(comments, "Id", "Name", assignment.Comments.Select(x=>x.Id));
                 return View(assignment);
             }
         }
@@ -79,14 +99,18 @@ namespace Task.Manager.AdminWeb.Controllers
             }
         }
 
-        //POST: Assignment
-        public ActionResult Create()
-        {
-
-            return View();
-        }
+        [HttpGet]
+        //public Task<ActionResult> Create()
+        //{
+        //    using (var client=new HttpClient())
+        //    {
+                
+        //    }
+        //    return View();
+        //}
 
         [HttpPost]
+        //POST: Assignment
         public ActionResult Create(Assignment assignment)
         {
             using (var client=new HttpClient())

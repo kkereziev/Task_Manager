@@ -46,6 +46,7 @@ namespace Task.Manager.Api.Controllers
         {
             var project = await _context.Projects
                 .Include(w=>w.Workers)
+                .ThenInclude(r=>r.Role)
                 .Include(a=>a.Assignments)
                 .SingleOrDefaultAsync(x=>x.Id==id);
 
@@ -120,6 +121,8 @@ namespace Task.Manager.Api.Controllers
 
             return project;
         }
+
+        
 
         private bool ProjectExists(int id)
         {

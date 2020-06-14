@@ -23,7 +23,7 @@ namespace Task.Manager.Entities
 
         public int ProjectId { get; set; }
 
-        public Role Role { get; set; }
+        public virtual Role Role { get; set; }
 
         public Project Project { get; set; }
 
