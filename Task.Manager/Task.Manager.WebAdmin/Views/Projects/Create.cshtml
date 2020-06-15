@@ -1,24 +1,21 @@
 ﻿@model ProjectDto
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<form asp-action="Edit" method="post" enctype="multipart/form-data">
-    @Html.AntiForgeryToken()     <input type="hidden" asp-for="Id" />
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()   
 
     <div class="form-group">
         <label asp-for="Name">
         </label>
-        <input asp-for="Name" class="form-control"/>
-    </div>     
-    <div class="form-group">
+        <input asp-for="Name" class="form-control" />
+    </div>     <div class="form-group">
         <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control"></textarea>
-    </div>     
+    </div>     <div class="form-group">
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
-
-
 

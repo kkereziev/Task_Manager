@@ -32,6 +32,7 @@ namespace Task.Manager.Api.Controllers
             var workers=await _context.Workers
                 .Include(p=>p.Project)
                 .Include(a=>a.Assignments)
+                .Include(x=>x.Role)
                 .ToListAsync();
 
             var workersDto = _mapper.Map<List<WorkerDto>>(workers);
@@ -42,7 +43,11 @@ namespace Task.Manager.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Worker>> GetWorker(int id)
         {
-            var worker = await _context.Workers.FindAsync(id);
+            var worker = await _context.Workers
+                .Include(p => p.Project)
+                .Include(a => a.Assignments)
+                .Include(x => x.Role)
+                .SingleOrDefaultAsync(x=>x.Id==id);
 
             if (worker == null)
             {
@@ -56,15 +61,17 @@ namespace Task.Manager.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutWorker(int id, Worker worker)
+        public async Task<IActionResult> PutWorker(int id, WorkerDto workerDto)
         {
+            var worker = _mapper.Map<Worker>(workerDto);
             if (id != worker.Id)
             {
                 return BadRequest();
             }
 
             _context.Entry(worker).State = EntityState.Modified;
-
+            
+            
             try
             {
                 await _context.SaveChangesAsync();

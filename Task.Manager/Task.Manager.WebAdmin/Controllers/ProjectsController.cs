@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -53,9 +54,73 @@ namespace Task.Manager.WebAdmin.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            using (var client = new HttpClient())
+            {
+                //Project
+                var projectUrl = $"{baseUrl}api/projects/{id}";
+                var projectResponse = await client.GetStringAsync(projectUrl);
+                var project = JsonConvert.DeserializeObject<ProjectDto>(projectResponse);
+
+
+                return View(project);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProjectDto projectDto)
+        {
+            using (var client = new HttpClient())
+            {
+                var projectUrl = $"{baseUrl}api/projects/{projectDto.Id}";
+                var projectDtoString = JsonConvert.SerializeObject(projectDto);
+                var projectResponse = await client.PutAsync(projectUrl, new StringContent(projectDtoString, Encoding.UTF8, "application/json"));
+
+                if (projectResponse.IsSuccessStatusCode)
+                {
+                    projectDto =
+                        JsonConvert.DeserializeObject<ProjectDto>(
+                            await projectResponse.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Update failed");
+                }
+
+                return View(projectDto);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            using (var client=new HttpClient())
+            {
+                return View(new ProjectDto());
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(ProjectDto projectDto)
+        {
+            using (var client=new HttpClient())
+            {
+                var projectUrl = $"{baseUrl}api/projects/";
+                var projectDtoString = JsonConvert.SerializeObject(projectDto);
+                var projectResponse = await client.PostAsync(projectUrl,
+                    new StringContent(projectDtoString, Encoding.UTF8, "application/json"));
+                if (projectResponse.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index",Index());
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Update failed");
+                    return View(projectDto);
+                }
+            }
         }
     }
 }

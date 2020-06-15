@@ -23,7 +23,7 @@ namespace Task.Manager.WebAdmin.Controllers
                 var workersUrl = $"{baseUrl}api/workers";
                 var workersResponse = await client.GetStringAsync(workersUrl);
 
-                var workers = JsonConvert.DeserializeObject<List<Assignment>>(workersResponse);
+                var workers = JsonConvert.DeserializeObject<List<WorkerDto>>(workersResponse);
 
                 return View(workers);
             }
@@ -36,7 +36,7 @@ namespace Task.Manager.WebAdmin.Controllers
                 var workersUrl = $"{baseUrl}api/workers/{id}";
                 var workersResponse = await client.GetStringAsync(workersUrl);
 
-                var workers = JsonConvert.DeserializeObject<Assignment>(workersResponse);
+                var workers = JsonConvert.DeserializeObject<Worker>(workersResponse);
 
                 return View(workers);
             }
@@ -58,6 +58,18 @@ namespace Task.Manager.WebAdmin.Controllers
                 var projects = JsonConvert.DeserializeObject<List<ProjectDto>>(projectsResponse);
                 ViewBag.Projects = new SelectList(projects, "Id", "Name", worker.Project.Id);
 
+                //Assignments
+                var assignmentsUrl = $"{baseUrl}api/assignments";
+                var assignmentResponse = await client.GetStringAsync(assignmentsUrl);
+                var assignments = JsonConvert.DeserializeObject<List<AssignmentDto>>(assignmentResponse);
+                ViewBag.Assignments = new MultiSelectList(assignments, "Id", "Title",worker.Assignments.Select(x=>x.Id));
+
+                //Roles
+                var rolesUrl = $"{baseUrl}api/roles";
+                var rolesResponse = await client.GetStringAsync(rolesUrl);
+                var roles = JsonConvert.DeserializeObject<List<RoleDto>>(rolesResponse);
+                ViewBag.Roles = new SelectList(roles, "Id", "Name", worker.Role.Id);
+                
                 return View(worker);
             }
         }
@@ -65,8 +77,20 @@ namespace Task.Manager.WebAdmin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(WorkerDto workerDto)
         {
+            
             using (var client = new HttpClient())
             {
+                var projects=deserializeProjectDtos(client);
+                var roles = deserializeRoleDtos(client);
+                var assignments = deserializeAssignmentDtos(client);
+
+                var projId = workerDto.Project.Id;
+                workerDto.Project = projects.Result.SingleOrDefault(x => x.Id == projId);
+
+                var roleId = workerDto.Role.Id;
+                workerDto.Role = roles.Result.SingleOrDefault(x => x.Id == roleId);
+
+
                 var workersUrl = $"{baseUrl}api/workers/{workerDto.Id}";
                 var workerDtoString = JsonConvert.SerializeObject(workerDto);
                 var workersResponse = await client.PutAsync(workersUrl,
@@ -87,6 +111,28 @@ namespace Task.Manager.WebAdmin.Controllers
             }
         }
 
+        private async Task<List<ProjectDto>> deserializeProjectDtos(HttpClient client)
+        {
+            var projectsUrl = $"{baseUrl}api/projects";
+            var projectsResponse = await client.GetStringAsync(projectsUrl);
+            var projects = JsonConvert.DeserializeObject<List<ProjectDto>>(projectsResponse);
+            return projects;
+        }
 
+        private async Task<List<RoleDto>> deserializeRoleDtos(HttpClient client)
+        {
+            var rolesUrl = $"{baseUrl}api/roles";
+            var rolesResponse = await client.GetStringAsync(rolesUrl);
+            var roles = JsonConvert.DeserializeObject<List<RoleDto>>(rolesResponse);
+            return roles;
+        }
+
+        private async Task<List<AssignmentDto>> deserializeAssignmentDtos(HttpClient client)
+        {
+            var assignmentsUrl = $"{baseUrl}api/assignments";
+            var assignmentsResponse = await client.GetStringAsync(assignmentsUrl);
+            var assignments = JsonConvert.DeserializeObject<List<AssignmentDto>>(assignmentsResponse);
+            return assignments;
+        }
     }
 }

@@ -22,14 +22,9 @@
         <tr>
             <td><a asp-action="Get" asp-route-id="@projects.Id">@projects.Name</a></td>
             <td>@projects.Description</td>
-            @*<td>
-                <a asp-action="Edit" asp-route-id="@projects.Id" class="btn btn-success">
-                    <i class="glyphicon glyphicon-edit"></i>
-                    Промени
-                </a>
-            </td>*@
         </tr>
     }
+    <a style="float:right" class="btn btn-info" asp-action="Create" >Create new project</a>
     </tbody>
 </table>
 </body>

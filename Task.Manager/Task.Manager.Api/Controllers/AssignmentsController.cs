@@ -33,6 +33,7 @@ namespace Task.Manager.Api.Controllers
             var assignments = await _context.Assignments
                 .Include(p=>p.Project)
                 .Include(c=>c.Comments)
+                .Include(w=>w.Worker)
                 .ToListAsync();
 
             var assignemntsDto = _mapper.Map<List<AssignmentDto>>(assignments);

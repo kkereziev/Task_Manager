@@ -1,7 +1,48 @@
-﻿
+﻿@model List<WorkerDto>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+    <html>
+    <head>
+        <h1>@ViewData["Title"]</h1>
+    </head>
+    <body>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Role</th>
+                    <th>Project</th>
+                    <th>Email</th>
+                    <th>Tasks</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var worker in Model)
+                {
+                    <tr>
+                        <td><a asp-action="Get" asp-route-id="@worker.Id">@worker.Name</a></td>
+                        <td>@worker.Status</td>
+                        <td>@worker.Project.Name</td>
+                        <td>
+                            @foreach (var g in worker.Assignments)
+                            {
+                                {<a class="badge badge-primary" asp-controller="Assignments" asp-action="Get" asp-route-id="@g.Id">@g.Title</a>}
+                            }
+                        </td>
+                        <td>
+                            <a asp-controller="Workers" asp-action="Edit" asp-route-id="@worker.Id" class="btn btn-success">
+                                <i class="glyphicon glyphicon-edit"></i>
+                                Change
+                            </a>
+                        </td>
+                    </tr>
+                }
+                <a style="float:right" class="btn btn-info" asp-action="Create">Create new worker</a>
+            </tbody>
+        </table>
+    </body>
+    </html>
 

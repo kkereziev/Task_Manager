@@ -152,7 +152,6 @@ C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\bin\Debug\
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\bin\Debug\netcoreapp3.1\Task.Manager.Api.dll
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\bin\Debug\netcoreapp3.1\Task.Manager.Api.pdb
-C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Projects\Edit.cshtml.g.cs
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Projects\Index.cshtml.g.cs
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Task.Manager.WebAdmin.csproj.CoreCompileInputs.cache
@@ -161,3 +160,6 @@ C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Projects\Get.cshtml.g.cs
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Workers\Edit.cshtml.g.cs
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Workers\Index.cshtml.g.cs
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Projects\Create.cshtml.g.cs
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Projects\Edit.cshtml.g.cs
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Assignments\Get.cshtml.g.cs

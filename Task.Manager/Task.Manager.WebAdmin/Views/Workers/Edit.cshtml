@@ -1,7 +1,31 @@
-﻿
+﻿@model WorkerDto
 @{
     ViewData["Title"] = "Edit";
 }
 
 <h1>Edit</h1>
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken() <input type="hidden" asp-for="Id" />
 
+    <div class="form-group">
+        <label asp-for="Name">
+        </label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Status"></label> <input asp-for="Status" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label> <input asp-for="Email" class="form-control" />
+    </div>
+    
+    <div class="form-group"> <label asp-for="Role.Id"></label> <select asp-for="Role.Id"
+                                                                                   asp-items="ViewBag.Roles" class="form-control">
+        <option></option>
+    </select> </div>
+    <div class="form-group"> <label asp-for="Project.Id"></label> <select asp-for="Project.Id"
+                                                                                     asp-items="ViewBag.Projects" class="form-control">
+        <option></option>
+    </select> </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

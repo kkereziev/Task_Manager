@@ -16,7 +16,7 @@ namespace Task.Manager.Api.Mapping
             CreateMap<Comment, CommentDto>().ReverseMap();
             CreateMap<Project, ProjectDto>().ReverseMap();
             CreateMap<Role, RoleDto>().ReverseMap();
-            CreateMap<Worker, WorkerDto>();
+            CreateMap<Worker, WorkerDto>().ReverseMap();
         }
     }
 }
