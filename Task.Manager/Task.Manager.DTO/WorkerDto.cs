@@ -18,6 +18,8 @@ namespace Task.Manager.DTO
         [Required]
         public string Status { get; set; }
 
+        public int[] AssignmentsId { get; set; }
+
         public virtual RoleDto Role { get; set; }
 
         public ProjectDto Project { get; set; }

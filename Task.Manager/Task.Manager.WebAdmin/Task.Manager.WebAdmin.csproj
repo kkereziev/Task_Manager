@@ -5,17 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Views\JS\TableSearch.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Views\JS\TableSearch.js">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
       <PrivateAssets>all</PrivateAssets>

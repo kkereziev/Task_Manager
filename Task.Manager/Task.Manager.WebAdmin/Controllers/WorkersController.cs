@@ -33,12 +33,12 @@ namespace Task.Manager.WebAdmin.Controllers
         {
             using (var client = new HttpClient())
             {
+                //Workers
                 var workersUrl = $"{baseUrl}api/workers/{id}";
                 var workersResponse = await client.GetStringAsync(workersUrl);
-
-                var workers = JsonConvert.DeserializeObject<Worker>(workersResponse);
-
-                return View(workers);
+                var worker = JsonConvert.DeserializeObject<Worker>(workersResponse);
+                
+                return View(worker);
             }
         }
 
@@ -89,8 +89,17 @@ namespace Task.Manager.WebAdmin.Controllers
 
                 var roleId = workerDto.Role.Id;
                 workerDto.Role = roles.Result.SingleOrDefault(x => x.Id == roleId);
-
-
+                
+                workerDto.Assignments = null;
+                if (workerDto.AssignmentsId.Length>0)
+                {
+                    workerDto.Assignments=new List<AssignmentDto>();
+                }
+                foreach (var id in workerDto.AssignmentsId)
+                {
+                    workerDto.Assignments.Add(assignments.Result.FirstOrDefault(x=>x.Id==id));
+                }
+                
                 var workersUrl = $"{baseUrl}api/workers/{workerDto.Id}";
                 var workerDtoString = JsonConvert.SerializeObject(workerDto);
                 var workersResponse = await client.PutAsync(workersUrl,
@@ -107,7 +116,7 @@ namespace Task.Manager.WebAdmin.Controllers
                     ModelState.AddModelError(string.Empty, "Update failed");
                 }
 
-                return View(workerDto);
+                return RedirectToAction("Index",Index());
             }
         }
 

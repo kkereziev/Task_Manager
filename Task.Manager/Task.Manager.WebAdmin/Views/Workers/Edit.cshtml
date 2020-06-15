@@ -1,4 +1,5 @@
-﻿@model WorkerDto
+﻿@using System.Linq
+@model WorkerDto
 @{
     ViewData["Title"] = "Edit";
 }
@@ -18,14 +19,23 @@
     <div class="form-group">
         <label asp-for="Email"></label> <input asp-for="Email" class="form-control" />
     </div>
-    
-    <div class="form-group"> <label asp-for="Role.Id"></label> <select asp-for="Role.Id"
-                                                                                   asp-items="ViewBag.Roles" class="form-control">
-        <option></option>
-    </select> </div>
-    <div class="form-group"> <label asp-for="Project.Id"></label> <select asp-for="Project.Id"
-                                                                                     asp-items="ViewBag.Projects" class="form-control">
-        <option></option>
-    </select> </div>
+
+    <div class="form-group">
+        <label asp-for="Role.Id"></label> <select asp-for="Role.Id"
+                                                  asp-items="ViewBag.Roles" class="form-control">
+            <option></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Project.Id"></label> <select asp-for="Project.Id"
+                                                     asp-items="ViewBag.Projects" class="form-control">
+            <option></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="AssignmentsId"></label>
+        <select asp-for="AssignmentsId" asp-items="ViewBag.Assignments" multiple class="form-control"></select>
+    </div>
+
     <button type="submit" class="btn btn-primary">Save</button>
 </form>

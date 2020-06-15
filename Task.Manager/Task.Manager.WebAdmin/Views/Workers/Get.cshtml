@@ -1,8 +1,10 @@
-﻿
-@model ProjectDto
+﻿@model WorkerDto
 @{
     ViewData["Title"] = "Get";
 }
+
+<h1>Worker</h1>
+
 <html>
 <head>
 
@@ -11,14 +13,14 @@
     <a style="float:right" class="btn btn-info" asp-action="Edit" asp-route-id="@Model.Id">Редактирай проекта</a>
     <h1 style="text-align: center">@Model.Name</h1>
 
-<div class="form-group shadow-textarea">
-    <h2>Description</h2>
-    <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" disabled>@Model.Description</textarea>
-</div>
+    <div class="form-group shadow-textarea">
+        <h2>Description</h2>
+        <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" disabled>@Model.Email</textarea>
+    </div>
 
     <input class="form-control" id="myInput" type="text" placeholder="Search..">
     <h2>Workers</h2>
-    <table class="table table-bordered table-striped table-hover" >
+    <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th>Name</th>
@@ -47,7 +49,7 @@
     </table>
 
     <h2>Tasks</h2>
-    <table class="table table-bordered table-striped table-hover" >
+    <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th>Title</th>
@@ -73,5 +75,4 @@
     </table>
 </body>
 </html>
-
 

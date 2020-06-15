@@ -163,3 +163,4 @@ C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Projects\Create.cshtml.g.cs
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Projects\Edit.cshtml.g.cs
 C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Assignments\Get.cshtml.g.cs
+C:\Users\Krum\Desktop\Task.Manager\Task.Manager\Task.Manager.WebAdmin\obj\Debug\netcoreapp3.1\Razor\Views\Workers\Get.cshtml.g.cs

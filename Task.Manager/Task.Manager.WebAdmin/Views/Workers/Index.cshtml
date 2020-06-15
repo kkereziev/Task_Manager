@@ -1,6 +1,6 @@
 ﻿@model List<WorkerDto>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Workers";
 }
 
     <html>
@@ -13,8 +13,8 @@
                 <tr>
                     <th>Name</th>
                     <th>Status</th>
-                    <th>Role</th>
                     <th>Project</th>
+                    <th>Role</th>
                     <th>Email</th>
                     <th>Tasks</th>
                 </tr>
@@ -26,6 +26,8 @@
                         <td><a asp-action="Get" asp-route-id="@worker.Id">@worker.Name</a></td>
                         <td>@worker.Status</td>
                         <td>@worker.Project.Name</td>
+                        <td>@worker.Role.Name</td>
+                        <td>@worker.Email</td>
                         <td>
                             @foreach (var g in worker.Assignments)
                             {
