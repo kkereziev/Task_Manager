@@ -100,25 +100,50 @@ namespace Task.Manager.AdminWeb.Controllers
         }
 
         [HttpGet]
-        //public Task<ActionResult> Create()
-        //{
-        //    using (var client=new HttpClient())
-        //    {
-                
-        //    }
-        //    return View();
-        //}
+        public async Task<IActionResult> Create(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var projects = deserializeProjectDto(client);
+                var project = new List<ProjectDto>(projects.Result);
+                ViewBag.Projects = new SelectList(project,"ProjectId","Name");
+                var workers = new List<WorkerDto>();
+                workers.AddRange(project[0].Workers);
+                ViewBag.Workers = new SelectList(workers, "WorkerId", "Name");
+                return View(new AssignmentDto());
+            }
+        }
 
         [HttpPost]
         //POST: Assignment
-        public ActionResult Create(Assignment assignment)
+        public async Task<IActionResult> Create(AssignmentDto assignmentDto)
         {
-            using (var client=new HttpClient())
+            using (var client = new HttpClient())
             {
-                client.BaseAddress=new Uri("");
-                //var postAssignemnt = client.PostAsync("",assignment);
+                var assignmentUrl = $"{baseUrl}api/assignments/";
+                var assignmentDtoString = JsonConvert.SerializeObject(assignmentDto);
+                var assignmentResponse = await client.PostAsync(assignmentUrl,
+                    new StringContent(assignmentDtoString, Encoding.UTF8, "application/json"));
+                if (assignmentResponse.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index", "Projects");
+
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Update failed");
+                    return View(assignmentDto);
+                }
             }
-            return View(assignment);
+        }
+
+        private async Task<List<ProjectDto>> deserializeProjectDto(HttpClient client)
+        {
+            var projectsUrl = $"{baseUrl}api/projects/";
+            var projectsResponse = await client.GetStringAsync(projectsUrl);
+            var projects = JsonConvert.DeserializeObject<List<ProjectDto>>(projectsResponse);
+           
+            return projects;
         }
     }
 }

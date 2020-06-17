@@ -24,6 +24,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
+                <th>Assignments</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -33,34 +34,41 @@
                     <td><a asp-controller="Workers" asp-action="Get" asp-route-id="@worker.WorkerId">@worker.Name</a></td>
                     <td>@worker.Email</td>
                     <td>@worker.Role.Name</td>
-                   
+                        <td>
+                            @foreach (var g in Model.Assignments)
+                            {
+                                <a class="badge badge-primary" asp-controller="Assignments" asp-action="Get" asp-route-id="@g.AssignmentId">@g.Title</a>
+                            }
+                        </td>
                 </tr>
             }
         </tbody>
     </table>
 
     <h2>Tasks</h2>
-    <table class="table table-bordered table-striped table-hover" >
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Worker</th>
-            </tr>
-        </thead>
-        <tbody>
+<table class="table table-bordered table-striped table-hover" >
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Worker</th>
+    </tr>
+    </thead>
+    <tbody>
 
-            @foreach (var assignment in Model.Assignments.Where(x=>x.Status=="Active"))
-            {
-                <tr>
-                    <td><a asp-controller="Assignments" asp-action="Get" asp-route-id="@assignment.AssignmentId">@assignment.Title</a></td>
-                    <td>@assignment.Description</td>
-                    <td><a asp-controller="Workers" asp-action="Get" asp-route-id="@assignment.Worker.WorkerId">@assignment.Worker.Name</a></td>
+    @foreach (var assignment in Model.Assignments.Where(x=>x.Status=="Active"))
+    {
+        <tr>
+            <td><a asp-controller="Assignments" asp-action="Get" asp-route-id="@assignment.AssignmentId">@assignment.Title</a></td>
+            <td>@assignment.Description</td>
+            <td><a asp-controller="Workers" asp-action="Get" asp-route-id="@assignment.Worker.WorkerId">@assignment.Worker.Name</a></td>
                    
-                </tr>
-            }
-        </tbody>
-    </table>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<a style="float:right" class="btn btn-info" asp-controller="Assignments" asp-action="Create" asp-route-id="@Model.ProjectId">Create assignment</a>
 </body>
 </html>
 

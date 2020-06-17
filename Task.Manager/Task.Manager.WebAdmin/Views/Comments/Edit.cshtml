@@ -1,0 +1,29 @@
+﻿@model CommentDto
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()     <input type="hidden" asp-for="CommentId" />
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div  style="display: none;" class="form-group">
+        <label asp-for="AddedOn">
+        </label>
+        <input  asp-for="AddedOn" class="form-control" />
+    </div>
+    <div style="display: none;" class="form-group">
+        <label asp-for="AssignmentId" type="hidden"></label>
+        <select type="hidden" asp-for="AssignmentId" asp-items="ViewBag.Assignments" multiple class="form-control"></select>
+    </div>
+    <div style="display: none;" class="form-group">
+        <label asp-for="WorkerId" type="hidden"></label>
+        <select type="hidden" asp-for="WorkerId" asp-items="ViewBag.Workers" multiple class="form-control"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

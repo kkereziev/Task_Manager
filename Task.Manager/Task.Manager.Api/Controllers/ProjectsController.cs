@@ -68,30 +68,6 @@ namespace Task.Manager.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProject(int id, ProjectDto project)
         {
-            using (var client=new HttpClient())
-            {
-                //Assignments
-                var assignmentsUrl = $"https://localhost:44358/api/assignments";
-                var assignmentsResponse = await client.GetStringAsync(assignmentsUrl);
-                var assignments = JsonConvert.DeserializeObject<List<AssignmentDto>>(assignmentsResponse);
-
-                //Workers
-                var workersUrl = $"https://localhost:44358/api/workers";
-                var workersResponse = await client.GetStringAsync(workersUrl);
-                var workers = JsonConvert.DeserializeObject<List<WorkerDto>>(workersResponse);
-
-                project.Assignments = new List<AssignmentDto>();
-                project.Workers = new List<WorkerDto>();
-                foreach (var assignmentId in project.AssignmentIds)
-                {
-                    project.Assignments.Add(assignments.Find(x=>x.AssignmentId==assignmentId));
-                }
-
-                foreach (var workerId in project.WorkerIds)
-                {
-                    project.Workers.Add(workers.Find(x => x.WorkerId == workerId));
-                }
-            }
             
             if (id != project.ProjectId)
             {

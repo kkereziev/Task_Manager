@@ -78,11 +78,16 @@ namespace Task.Manager.Api.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
+                    b.Property<int?>("WorkerId")
+                        .HasColumnType("int");
+
                     b.HasKey("CommentId");
 
                     b.HasIndex("AssignmentId");
 
-                    b.ToTable("Comment");
+                    b.HasIndex("WorkerId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Task.Manager.Entities.Project", b =>
@@ -180,6 +185,10 @@ namespace Task.Manager.Api.Migrations
                     b.HasOne("Task.Manager.Entities.Assignment", "Assignment")
                         .WithMany("Comments")
                         .HasForeignKey("AssignmentId");
+
+                    b.HasOne("Task.Manager.Entities.Worker", "Worker")
+                        .WithMany("Comments")
+                        .HasForeignKey("WorkerId");
                 });
 
             modelBuilder.Entity("Task.Manager.Entities.Worker", b =>

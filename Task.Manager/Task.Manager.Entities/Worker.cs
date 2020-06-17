@@ -28,5 +28,7 @@ namespace Task.Manager.Entities
         public virtual Project Project { get; set; }
 
         public ICollection<Assignment> Assignments { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
     }
 }

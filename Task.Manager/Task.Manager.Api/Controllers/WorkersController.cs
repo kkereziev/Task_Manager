@@ -41,7 +41,7 @@ namespace Task.Manager.Api.Controllers
 
         // GET: api/Workers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Worker>> GetWorker(int id)
+        public async Task<ActionResult<WorkerDto>> GetWorker(int id)
         {
             var worker = await _context.Workers
                 .Include(p => p.Project)
@@ -54,7 +54,8 @@ namespace Task.Manager.Api.Controllers
                 return NotFound();
             }
 
-            return worker;
+            var workerDto = _mapper.Map<WorkerDto>(worker);
+            return workerDto;
         }
 
         // PUT: api/Workers/5
@@ -64,6 +65,7 @@ namespace Task.Manager.Api.Controllers
         public async Task<IActionResult> PutWorker(int id, WorkerDto workerDto)
         {
             var worker = _mapper.Map<Worker>(workerDto);
+            
             if (id != worker.WorkerId)
             {
                 return BadRequest();

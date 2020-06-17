@@ -74,8 +74,7 @@ namespace Task.Manager.Api.Controllers
                 return BadRequest();
             }
 
-            assignment.ProjectId = assignment.Project.ProjectId;
-            assignment.WorkerId = assignment.Worker.WorkerId;
+            
             _context.Entry(assignment).State = EntityState.Modified;
 
             try

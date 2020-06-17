@@ -24,15 +24,6 @@
             <p>Project: <a asp-action="Get" asp-controller="Projects" asp-route-id="@Model.Project.ProjectId">@Model.Project.Name</a></p>
             <p>Status: @Model.Status</p>
         </div>
-        <div class="col-sm-6">
-            <p>
-                Assignments:
-                @foreach (var g in Model.Assignments)
-                {
-                    <a class="badge badge-primary" asp-controller="Assignments" asp-action="Get" asp-route-id="@g.AssignmentId">@g.Title</a>
-                }
-            </p>
-        </div>
     </div>
 </body>
 </html>

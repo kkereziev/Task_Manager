@@ -12,8 +12,14 @@ namespace Task.Manager.DTO
         [StringLength(250)]
         public string Description { get; set; }
         
-        public DateTime AddedOn { get; set; }
+        public DateTime AddedOn { get; set; }=DateTime.Now;
+
+        public int AssignmentId { get; set; }
+        
+        public int WorkerId { get; set; }
 
         public virtual AssignmentDto Assignment { get; set; }
+
+        public virtual WorkerDto Worker { get; set; }
     }
 }

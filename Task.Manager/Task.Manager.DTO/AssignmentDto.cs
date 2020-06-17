@@ -24,6 +24,10 @@ namespace Task.Manager.DTO
 
         public DateTime UpdatedOn { get; set; } = DateTime.Now;
 
+        public int ProjectId { get; set; }
+        
+        public int WorkerId { get; set; }
+        
         public virtual ProjectDto Project { get; set; }
 
         public virtual WorkerDto Worker { get; set; }
