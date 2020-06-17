@@ -7,7 +7,7 @@ namespace Task.Manager.DTO
 {
     public class WorkerDto
     {
-        public int Id { get; set; }
+        public int WorkerId { get; set; }
         [Required]
         [StringLength(250)]
         public string Name { get; set; }
@@ -19,10 +19,13 @@ namespace Task.Manager.DTO
         public string Status { get; set; }
 
         public int[] AssignmentsId { get; set; }
+        public int? RoleId { get; set; }
+
+        public int? ProjectId { get; set; }
 
         public virtual RoleDto Role { get; set; }
 
-        public ProjectDto Project { get; set; }
+        public virtual ProjectDto Project { get; set; }
 
         public ICollection<AssignmentDto> Assignments { get; set; }
     }

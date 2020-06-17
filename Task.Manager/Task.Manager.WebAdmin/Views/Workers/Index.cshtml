@@ -16,14 +16,14 @@
                     <th>Project</th>
                     <th>Role</th>
                     <th>Email</th>
-                    <th>Tasks</th>
+                    <th>Assignments</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var worker in Model)
+                @foreach (var worker in Model.Where(x=>x.Status=="Active"))
                 {
                     <tr>
-                        <td><a asp-action="Get" asp-route-id="@worker.Id">@worker.Name</a></td>
+                        <td><a asp-action="Get" asp-route-id="@worker.WorkerId">@worker.Name</a></td>
                         <td>@worker.Status</td>
                         <td>@worker.Project.Name</td>
                         <td>@worker.Role.Name</td>
@@ -31,14 +31,8 @@
                         <td>
                             @foreach (var g in worker.Assignments)
                             {
-                                {<a class="badge badge-primary" asp-controller="Assignments" asp-action="Get" asp-route-id="@g.Id">@g.Title</a>}
+                                {<a class="badge badge-primary" asp-controller="Assignments" asp-action="Get" asp-route-id="@g.AssignmentId">@g.Title</a>}
                             }
-                        </td>
-                        <td>
-                            <a asp-controller="Workers" asp-action="Edit" asp-route-id="@worker.Id" class="btn btn-success">
-                                <i class="glyphicon glyphicon-edit"></i>
-                                Change
-                            </a>
                         </td>
                     </tr>
                 }

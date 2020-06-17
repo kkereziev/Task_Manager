@@ -7,10 +7,16 @@ namespace Task.Manager.DTO
 {
     public class ProjectDto
     {
-        public int Id { get; set; }
+        public int ProjectId { get; set; }
 
         [Required]
         public string Name { get; set; }
+        
+        public string Status { get; set; }
+
+        public int[] WorkerIds { get; set; }
+        
+        public int[] AssignmentIds { get; set; }
 
         [Required]
         [StringLength(250)]

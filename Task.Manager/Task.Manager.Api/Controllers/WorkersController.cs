@@ -47,7 +47,7 @@ namespace Task.Manager.Api.Controllers
                 .Include(p => p.Project)
                 .Include(a => a.Assignments)
                 .Include(x => x.Role)
-                .SingleOrDefaultAsync(x=>x.Id==id);
+                .SingleOrDefaultAsync(x=>x.WorkerId==id);
 
             if (worker == null)
             {
@@ -64,7 +64,7 @@ namespace Task.Manager.Api.Controllers
         public async Task<IActionResult> PutWorker(int id, WorkerDto workerDto)
         {
             var worker = _mapper.Map<Worker>(workerDto);
-            if (id != worker.Id)
+            if (id != worker.WorkerId)
             {
                 return BadRequest();
             }
@@ -95,19 +95,25 @@ namespace Task.Manager.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Worker>> PostWorker(Worker worker)
+        public async Task<ActionResult<Worker>> PostWorker(WorkerDto workerDto)
         {
+            var worker = _mapper.Map<Worker>(workerDto);
             _context.Workers.Add(worker);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetWorker", new { id = worker.Id }, worker);
+            return CreatedAtAction("GetWorker", new { id = worker.WorkerId }, worker);
         }
 
         // DELETE: api/Workers/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Worker>> DeleteWorker(int id)
+        public async Task<ActionResult<WorkerDto>> DeleteWorker(int id)
         {
-            var worker = await _context.Workers.FindAsync(id);
+            var worker = await _context.Workers
+                .Include(x => x.Assignments)
+                .Include(p => p.Project)
+                .Include(r => r.Role)
+                .FirstOrDefaultAsync(x => x.WorkerId == id);
+            var workersDto = _mapper.Map<WorkerDto>(worker);
             if (worker == null)
             {
                 return NotFound();
@@ -115,13 +121,12 @@ namespace Task.Manager.Api.Controllers
 
             _context.Workers.Remove(worker);
             await _context.SaveChangesAsync();
-
-            return worker;
+            return workersDto;
         }
 
         private bool WorkerExists(int id)
         {
-            return _context.Workers.Any(e => e.Id == id);
+            return _context.Workers.Any(e => e.WorkerId == id);
         }
     }
 }

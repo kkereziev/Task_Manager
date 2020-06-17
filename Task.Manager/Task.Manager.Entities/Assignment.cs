@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Task.Manager.Entities
 {
     public class Assignment
     {
-        public int Id { get; set; }
+        public int AssignmentId { get; set; }
 
         [Required]
         [StringLength(250)]
@@ -24,13 +25,14 @@ namespace Task.Manager.Entities
 
         public DateTime UpdatedOn { get; set; } = DateTime.Now;
 
-        public int ProjectId { get; set; }
+        public int? ProjectId { get; set; }
+        
+        public int? WorkerId { get; set; }
 
-        public int WorkerId { get; set; }
-
-        public Project Project { get; set; }
-
-        public Worker Worker { get; set; }
+        public virtual Project Project { get; set; }
+        
+        [ForeignKey("WorkerId")]
+        public virtual Worker Worker { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
     }

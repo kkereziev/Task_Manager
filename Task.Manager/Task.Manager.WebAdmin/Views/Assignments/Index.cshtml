@@ -30,7 +30,7 @@
     {
         <tr>
             <td>@assignment.Title</td>
-            <td><a asp-action="Get" asp-route-id="@assignment.Id">@assignment.Title</a></td>
+            <td><a asp-action="Get" asp-route-id="@assignment.AssignmentId">@assignment.Title</a></td>
             <td>@assignment.Status</td>
             <td>@assignment.Project.Name</td>
             <td>
@@ -39,7 +39,7 @@
             <td>@assignment.CreatedOn</td>
             <td>@assignment.UpdatedOn</td>
             <td>
-                <a asp-action="Edit" asp-route-id="@assignment.Id" class="btn btn-success">
+                <a asp-action="Edit" asp-route-id="@assignment.AssignmentId" class="btn btn-success">
                     <i class="glyphicon glyphicon-edit"></i>
                 </a>
             </td>

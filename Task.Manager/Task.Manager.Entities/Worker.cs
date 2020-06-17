@@ -8,7 +8,7 @@ namespace Task.Manager.Entities
 {
     public class Worker
     {
-        public int Id { get; set; }
+        public int WorkerId { get; set; }
         [Required]
         [StringLength(250)]
         public string Name { get; set; }
@@ -19,13 +19,13 @@ namespace Task.Manager.Entities
         [Required]
         public string Status { get; set; }
         
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
 
-        public int ProjectId { get; set; }
+        public int? ProjectId { get; set; }
 
         public virtual Role Role { get; set; }
 
-        public Project Project { get; set; }
+        public virtual Project Project { get; set; }
 
         public ICollection<Assignment> Assignments { get; set; }
     }

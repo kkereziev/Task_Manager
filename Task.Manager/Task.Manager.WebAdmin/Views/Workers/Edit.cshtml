@@ -1,12 +1,11 @@
-﻿@using System.Linq
-@model WorkerDto
+﻿@model WorkerDto
 @{
     ViewData["Title"] = "Edit";
 }
 
 <h1>Edit</h1>
 <form asp-action="Edit" method="post" enctype="multipart/form-data">
-    @Html.AntiForgeryToken() <input type="hidden" asp-for="Id" />
+    @Html.AntiForgeryToken() <input type="hidden" asp-for="WorkerId" />
 
     <div class="form-group">
         <label asp-for="Name">
@@ -21,21 +20,21 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="Role.Id"></label> <select asp-for="Role.Id"
+        <label asp-for="RoleId"></label> <select asp-for="RoleId"
                                                   asp-items="ViewBag.Roles" class="form-control">
             <option></option>
         </select>
     </div>
     <div class="form-group">
-        <label asp-for="Project.Id"></label> <select asp-for="Project.Id"
+        <label asp-for="ProjectId"></label> <select asp-for="ProjectId"
                                                      asp-items="ViewBag.Projects" class="form-control">
             <option></option>
         </select>
     </div>
-    <div class="form-group">
-        <label asp-for="AssignmentsId"></label>
-        <select asp-for="AssignmentsId" asp-items="ViewBag.Assignments" multiple class="form-control"></select>
+    <div style="display: none;" class="form-group">
+        <label asp-for="AssignmentsId" type="hidden"></label>
+        <select type="hidden" asp-for="AssignmentsId" asp-items="ViewBag.Assignments" multiple class="form-control"></select>
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
-</form>
+</form> 

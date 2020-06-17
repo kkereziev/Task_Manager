@@ -7,7 +7,7 @@ namespace Task.Manager.DTO
 {
     public class RoleDto
     {
-        public int Id { get; set; }
+        public int RoleId { get; set; }
         [Required]
         public string Name { get; set; }
 

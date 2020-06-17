@@ -21,7 +21,7 @@ namespace Task.Manager.Api.Data
             {
                 t.HasMany(x => x.Comments).WithOne(x => x.Assignment).HasForeignKey(x => x.AssignmentId);
                 t.HasOne(t => t.Project).WithMany(t => t.Assignments).HasForeignKey(p => p.ProjectId);
-                t.HasOne(w => w.Worker).WithMany(a => a.Assignments).HasForeignKey(a => a.WorkerId);
+                t.HasOne(w => w.Worker).WithMany(a => a.Assignments).HasForeignKey(a => a.WorkerId).OnDelete(DeleteBehavior.SetNull);
             });
 
             modelBuilder.Entity<Worker>(w =>
@@ -30,7 +30,7 @@ namespace Task.Manager.Api.Data
                     .IsUnique();
                 //w.HasOne(r => r.Role).WithMany(w => w.Workers).HasForeignKey(w => w.RoleId);
                 w.HasOne(p => p.Project).WithMany(p => p.Workers).HasForeignKey(w => w.ProjectId);
-                w.HasMany(w => w.Assignments).WithOne(w => w.Worker).HasForeignKey(w => w.WorkerId);
+                w.HasMany(w => w.Assignments).WithOne(w => w.Worker).HasForeignKey(w => w.WorkerId).OnDelete(DeleteBehavior.SetNull);
                 w.HasIndex(a => a.Name).IsUnique();
             });
             

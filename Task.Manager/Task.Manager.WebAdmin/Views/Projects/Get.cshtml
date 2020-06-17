@@ -8,7 +8,7 @@
 
 </head>
 <body>
-    <a style="float:right" class="btn btn-info" asp-action="Edit" asp-route-id="@Model.Id">Редактирай проекта</a>
+    <a style="float:right" class="btn btn-info" asp-action="Edit" asp-route-id="@Model.ProjectId">Edit project</a>
     <h1 style="text-align: center">@Model.Name</h1>
 
 <div class="form-group shadow-textarea">
@@ -24,23 +24,16 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Status</th>
             </tr>
         </thead>
         <tbody id="myTable">
-            @foreach (var worker in Model.Workers)
+            @foreach (var worker in Model.Workers.Where(x=>x.Status=="Active"))
             {
                 <tr>
-                    <td><a asp-action="Get" asp-route-id="@worker.Id">@worker.Name</a></td>
+                    <td><a asp-controller="Workers" asp-action="Get" asp-route-id="@worker.WorkerId">@worker.Name</a></td>
                     <td>@worker.Email</td>
                     <td>@worker.Role.Name</td>
-                    <td>@worker.Status</td>
-                    <td>
-                        @*<a asp-controller="Workers" asp-action="Edit" asp-route-id="@worker.Id" class="btn btn-success">
-                                <i class="glyphicon glyphicon-edit"></i>
-                                Промени
-                            </a>*@
-                    </td>
+                   
                 </tr>
             }
         </tbody>
@@ -51,22 +44,19 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <th>UpdatedOn</th>
+                <th>Description</th>
+                <th>Worker</th>
             </tr>
         </thead>
         <tbody>
 
-            @foreach (var assignment in Model.Assignments)
+            @foreach (var assignment in Model.Assignments.Where(x=>x.Status=="Active"))
             {
                 <tr>
-                    <td><a asp-controller="Assignments" asp-action="Get" asp-route-id="@assignment.Id">@assignment.Title</a></td>
-                    <td>@assignment.UpdatedOn</td>
-                    <td>
-                        <a asp-controller="Assignments" asp-action="Edit" asp-route-id="@assignment.Id" class="btn btn-success">
-                            <i class="glyphicon glyphicon-edit"></i>
-                            Промени
-                        </a>
-                    </td>
+                    <td><a asp-controller="Assignments" asp-action="Get" asp-route-id="@assignment.AssignmentId">@assignment.Title</a></td>
+                    <td>@assignment.Description</td>
+                    <td><a asp-controller="Workers" asp-action="Get" asp-route-id="@assignment.Worker.WorkerId">@assignment.Worker.Name</a></td>
+                   
                 </tr>
             }
         </tbody>

@@ -17,10 +17,10 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var projects in Model)
+    @foreach (var projects in Model.Where(x=>x.Status=="Active"))
     {
         <tr>
-            <td><a asp-action="Get" asp-route-id="@projects.Id">@projects.Name</a></td>
+            <td><a asp-action="Get" asp-route-id="@projects.ProjectId">@projects.Name</a></td>
             <td>@projects.Description</td>
         </tr>
     }

@@ -43,7 +43,7 @@ namespace Task.Manager.Api.Controllers
         {
             var role = await _context.Roles
                 .Include(w => w.Workers)
-                .SingleOrDefaultAsync(x => x.Id == id);
+                .SingleOrDefaultAsync(x => x.RoleId == id);
 
             if (role == null)
             {
@@ -60,7 +60,7 @@ namespace Task.Manager.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProject(int id, RoleDto role)
         {
-            if (id != role.Id)
+            if (id != role.RoleId)
             {
                 return BadRequest();
             }
@@ -98,7 +98,7 @@ namespace Task.Manager.Api.Controllers
             await _context.SaveChangesAsync();
 
 
-            return CreatedAtAction("GetRole", new { id = project.Id }, project);
+            return CreatedAtAction("GetRole", new { id = project.RoleId}, project);
         }
 
         // DELETE: api/Projects/5
@@ -119,7 +119,7 @@ namespace Task.Manager.Api.Controllers
 
         private bool ProjectExists(int id)
         {
-            return _context.Projects.Any(e => e.Id == id);
+            return _context.Projects.Any(e => e.ProjectId == id);
         }
     }
 }

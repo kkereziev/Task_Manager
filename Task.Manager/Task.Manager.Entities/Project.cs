@@ -9,10 +9,12 @@ namespace Task.Manager.Entities
 {
     public class Project
     {
-        public int Id { get; set; }
+        public int ProjectId { get; set; }
 
         [Required]
         public string Name { get; set; }
+
+        public string Status { get; set; }
 
         [Required]
         [StringLength(250)]

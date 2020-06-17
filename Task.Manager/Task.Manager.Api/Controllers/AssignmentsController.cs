@@ -49,7 +49,7 @@ namespace Task.Manager.Api.Controllers
                 .Include(p => p.Project)
                 .Include(c => c.Comments)
                 .Include(w=>w.Worker)
-                .SingleOrDefaultAsync(x=>x.Id==id);
+                .SingleOrDefaultAsync(x=>x.AssignmentId==id);
 
             if (assignment == null)
             {
@@ -69,13 +69,13 @@ namespace Task.Manager.Api.Controllers
         {
             var assignment = _mapper.Map<Assignment>(assignmentDto);
             
-            if (id != assignment.Id)
+            if (id != assignment.AssignmentId)
             {
                 return BadRequest();
             }
 
-            assignment.ProjectId = assignment.Project.Id;
-            assignment.WorkerId = assignment.Worker.Id;
+            assignment.ProjectId = assignment.Project.ProjectId;
+            assignment.WorkerId = assignment.Worker.WorkerId;
             _context.Entry(assignment).State = EntityState.Modified;
 
             try
@@ -107,12 +107,12 @@ namespace Task.Manager.Api.Controllers
             _context.Assignments.Add(assignment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAssignment", new { id = assignment.Id }, assignment);
+            return CreatedAtAction("GetAssignment", new { id = assignment.AssignmentId }, assignment);
         }
 
         // DELETE: api/Assignments/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Assignment>> DeleteAssignment(int id)
+        public async Task<ActionResult<AssignmentDto>> DeleteAssignment(int id)
         {
             var assignment = await _context.Assignments.FindAsync(id);
             if (assignment == null)
@@ -122,13 +122,13 @@ namespace Task.Manager.Api.Controllers
 
             _context.Assignments.Remove(assignment);
             await _context.SaveChangesAsync();
-
-            return assignment;
+            var assignmentDto = _mapper.Map<AssignmentDto>(assignment);
+            return assignmentDto;
         }
 
         private bool AssignmentExists(int id)
         {
-            return _context.Assignments.Any(e => e.Id == id);
+            return _context.Assignments.Any(e => e.AssignmentId== id);
         }
     }
 }

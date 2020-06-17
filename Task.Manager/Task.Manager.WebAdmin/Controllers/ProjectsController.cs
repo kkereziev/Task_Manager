@@ -42,13 +42,13 @@ namespace Task.Manager.WebAdmin.Controllers
                 var workersUrl = $"{baseUrl}api/workers";
                 var workersResponse = await client.GetStringAsync(workersUrl);
                 var workers = JsonConvert.DeserializeObject<List<WorkerDto>>(workersResponse);
-                ViewBag.Workers = new SelectList(workers, "Id", "Name", project.Workers.Select(x=>x.Id));
+                ViewBag.Workers = new SelectList(workers, "WorkerId", "Name", project.Workers.Select(x=>x.WorkerId));
                 
                 //Assignements
                 var assignmentsUrl = $"{baseUrl}api/assignments";
                 var assignmentsResponse = await client.GetStringAsync(assignmentsUrl);
                 var assignments = JsonConvert.DeserializeObject<List<AssignmentDto>>(assignmentsResponse);
-                ViewBag.Assignments = new SelectList(assignments, "Id", "Name", project.Assignments.Select(x => x.Id));
+                ViewBag.Assignments = new SelectList(assignments, "AssignmentId", "Name", project.Assignments.Select(x => x.AssignmentId));
 
                 return View(project);
             }
@@ -64,7 +64,18 @@ namespace Task.Manager.WebAdmin.Controllers
                 var projectResponse = await client.GetStringAsync(projectUrl);
                 var project = JsonConvert.DeserializeObject<ProjectDto>(projectResponse);
 
+                //Workers
+                var workersUrl = $"{baseUrl}api/workers";
+                var workersResponse = await client.GetStringAsync(workersUrl);
+                var workers = JsonConvert.DeserializeObject<List<WorkerDto>>(workersResponse);
+                ViewBag.Workers = new MultiSelectList(workers, "WorkerId", "Name", project.Workers.Select(x => x.WorkerId));
 
+                //Assignements
+                var assignmentsUrl = $"{baseUrl}api/assignments";
+                var assignmentsResponse = await client.GetStringAsync(assignmentsUrl);
+                var assignments = JsonConvert.DeserializeObject<List<AssignmentDto>>(assignmentsResponse);
+                ViewBag.Assignments = new MultiSelectList(assignments, "AssignmentId", "Title", project.Assignments.Select(x => x.AssignmentId));
+                
                 return View(project);
             }
         }
@@ -74,7 +85,7 @@ namespace Task.Manager.WebAdmin.Controllers
         {
             using (var client = new HttpClient())
             {
-                var projectUrl = $"{baseUrl}api/projects/{projectDto.Id}";
+                var projectUrl = $"{baseUrl}api/projects/{projectDto.ProjectId}";
                 var projectDtoString = JsonConvert.SerializeObject(projectDto);
                 var projectResponse = await client.PutAsync(projectUrl, new StringContent(projectDtoString, Encoding.UTF8, "application/json"));
 
@@ -89,7 +100,7 @@ namespace Task.Manager.WebAdmin.Controllers
                     ModelState.AddModelError(string.Empty, "Update failed");
                 }
 
-                return View(projectDto);
+                return RedirectToAction("Index",Index());
             }
         }
 

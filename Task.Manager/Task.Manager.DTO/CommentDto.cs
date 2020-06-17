@@ -7,13 +7,13 @@ namespace Task.Manager.DTO
 {
     public class CommentDto
     {
-        public int Id { get; set; }
+        public int CommentId { get; set; }
 
         [StringLength(250)]
         public string Description { get; set; }
         
         public DateTime AddedOn { get; set; }
 
-        public AssignmentDto Assignment { get; set; }
+        public virtual AssignmentDto Assignment { get; set; }
     }
 }

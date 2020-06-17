@@ -7,7 +7,7 @@ namespace Task.Manager.DTO
 {
     public class AssignmentDto
     {
-        public int Id { get; set; }
+        public int AssignmentId { get; set; }
 
         [Required]
         [StringLength(250)]
@@ -24,9 +24,9 @@ namespace Task.Manager.DTO
 
         public DateTime UpdatedOn { get; set; } = DateTime.Now;
 
-        public ProjectDto Project { get; set; }
+        public virtual ProjectDto Project { get; set; }
 
-        public WorkerDto Worker { get; set; }
+        public virtual WorkerDto Worker { get; set; }
 
         public ICollection<CommentDto> Comments { get; set; }
     }

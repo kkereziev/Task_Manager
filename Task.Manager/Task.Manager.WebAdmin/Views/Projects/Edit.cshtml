@@ -6,17 +6,30 @@
 <h1>@ViewData["Title"]</h1>
 
 <form asp-action="Edit" method="post" enctype="multipart/form-data">
-    @Html.AntiForgeryToken()     <input type="hidden" asp-for="Id" />
+    @Html.AntiForgeryToken()     <input type="hidden" asp-for="ProjectId" />
 
     <div class="form-group">
         <label asp-for="Name">
         </label>
-        <input asp-for="Name" class="form-control"/>
-    </div>     
+        <input asp-for="Name" class="form-control" />
+    </div>
     <div class="form-group">
         <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control"></textarea>
-    </div>     
+    </div>
+    <div class="form-group">
+        <label asp-for="Status">
+        </label>
+        <input asp-for="Status" class="form-control" />
+    </div>
+    <div style="display: none;" class="form-group">
+        <label asp-for="AssignmentIds" type="hidden"></label>
+        <select type="hidden" asp-for="AssignmentIds" asp-items="ViewBag.Assignments" multiple class="form-control"></select>
+    </div>
+    <div style="display: none;" class="form-group">
+        <label asp-for="WorkerIds" type="hidden"></label>
+        <select type="hidden" asp-for="WorkerIds" asp-items="ViewBag.Workers" multiple class="form-control"></select>
+    </div>
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
 
