@@ -70,7 +70,6 @@ namespace Task.Manager.Api.Controllers
         public async Task<ActionResult<CommentDto>> DeleteComment(int id)
         {
             var comment = await _context.Comments
-                .Include(p => p.Worker)
                 .FirstOrDefaultAsync(x=>x.CommentId==id);
             
             if (comment == null)

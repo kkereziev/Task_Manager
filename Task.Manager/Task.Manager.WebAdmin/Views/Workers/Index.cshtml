@@ -16,11 +16,10 @@
                     <th>Project</th>
                     <th>Role</th>
                     <th>Email</th>
-                    <th>Assignments</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var worker in Model.Where(x=>x.Status=="Active"))
+                @foreach (var worker in Model)
                 {
                     <tr>
                         <td><a asp-action="Get" asp-route-id="@worker.WorkerId">@worker.Name</a></td>
@@ -28,12 +27,7 @@
                         <td>@worker.Project.Name</td>
                         <td>@worker.Role.Name</td>
                         <td>@worker.Email</td>
-                        <td>
-                            @foreach (var g in worker.Assignments)
-                            {
-                                {<a class="badge badge-primary" asp-controller="Assignments" asp-action="Get" asp-route-id="@g.AssignmentId">@g.Title</a>}
-                            }
-                        </td>
+                       
                     </tr>
                 }
                 <a style="float:right" class="btn btn-info" asp-action="Create">Create new worker</a>

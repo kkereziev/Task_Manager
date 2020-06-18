@@ -46,7 +46,7 @@ namespace Task.Manager.WebAdmin.Controllers
         {
             using (var client = new HttpClient())
             {
-                
+                commentDto.AddedOn=DateTime.Now;
                 var commentsUrl = $"{baseUrl}api/comments/{commentDto.CommentId}";
                 var commentDtoString = JsonConvert.SerializeObject(commentDto);
                 var commentsResponse = await client.PutAsync(commentsUrl, new StringContent(commentDtoString, Encoding.UTF8, "application/json"));
@@ -97,9 +97,10 @@ namespace Task.Manager.WebAdmin.Controllers
                 var commentDtoString = JsonConvert.SerializeObject(commentDto);
                 var commentResponse = await client.PostAsync(commentUrl,
                     new StringContent(commentDtoString, Encoding.UTF8, "application/json"));
+                var id = commentDto.AssignmentId;
                 if (commentResponse.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("Index", "Assignments");
+                    return RedirectToAction("Index", "Projects");
 
                 }
                 else
@@ -108,6 +109,22 @@ namespace Task.Manager.WebAdmin.Controllers
                     return View(commentDto);
                 }
             }
+        }
+        public async Task<IActionResult> Delete(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var commentUrl = $"{baseUrl}api/comments/{id}";
+                var commentsResponse = await client.DeleteAsync(commentUrl);
+
+                var result = commentsResponse;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index","Projects");
+                }
+            }
+
+            return RedirectToAction("Index", "Projects");
         }
 
         private async Task<List<AssignmentDto>> deserializeAssignmentDtos(HttpClient client)

@@ -26,7 +26,7 @@ namespace Task.Manager.DTO
 
         public int ProjectId { get; set; }
         
-        public int WorkerId { get; set; }
+        public int? WorkerId { get; set; }
         
         public virtual ProjectDto Project { get; set; }
 

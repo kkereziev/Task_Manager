@@ -17,17 +17,23 @@
         <textarea asp-for="Description" class="form-control"></textarea>
     </div>
     <div class="form-group">
-        <label asp-for="Status">
-        </label>
-        <input asp-for="Status" class="form-control" />
+        <label asp-for="Status"></label>
+        <select asp-for="Status" class="form-control">
+            <option>Active</option>
+            <option>Inactive</option>
+        </select>
     </div>
     <div class="form-group">
-        <label asp-for="ProjectId" type="hidden"></label>
-        <select  asp-for="ProjectId" asp-items="ViewBag.Projects" multiple class="form-control"></select>
+        <label asp-for="ProjectId"></label>Project <select asp-for="ProjectId"
+                                                       asp-items="ViewBag.Projects" class="form-control">
+            <option></option>
+        </select>
     </div>
     <div class="form-group">
-        <label asp-for="WorkerId" ></label>
-        <select asp-for="WorkerId" asp-items="ViewBag.Workers" multiple class="form-control"></select>
+        <label asp-for="WorkerId"></label>Worker <select asp-for="WorkerId"
+                                                     asp-items="ViewBag.Workers" class="form-control">
+            <option></option>
+        </select>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Save</button>

@@ -45,7 +45,7 @@ namespace Task.Manager.AdminWeb.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id,int projectId)
         {
             using (var client = new HttpClient())
             {
@@ -55,22 +55,22 @@ namespace Task.Manager.AdminWeb.Controllers
                 var assignment = JsonConvert.DeserializeObject<AssignmentDto>(assignmentsResponse);
                 
                 //Projects
-                var projectsUrl = $"{baseUrl}api/projects";
-                var projectsResponse = await client.GetStringAsync(projectsUrl);
-                var projects = JsonConvert.DeserializeObject<List<ProjectDto>>(projectsResponse);
-                ViewBag.Projects = new SelectList(projects, "Id", "Name", assignment.Project.ProjectId);
+                var projects = deserializeProjectDto(client);
+                var project = new List<ProjectDto>();
+                project.Add(projects.Result.FirstOrDefault(x=>x.ProjectId== projectId));
+                ViewBag.Projects = new SelectList(project, "ProjectId", "Name");
 
                 //Workers
-                var workersUrl = $"{baseUrl}api/workers";
-                var workersResponse = await client.GetStringAsync(workersUrl);
-                var workers = JsonConvert.DeserializeObject<List<WorkerDto>>(workersResponse);
-                ViewBag.Workers = new SelectList(workers, "Id", "Name", assignment.Worker.WorkerId);
+                var workers = deserializeWorkerDtos(client);
+                var worker = new List<WorkerDto>();
+                worker.AddRange(project[0].Workers);
+                ViewBag.Workers = new SelectList(worker, "WorkerId", "Name");
 
-                //Comments
-                var commentsUrl = $"{baseUrl}api/comments";
-                var commentsResponse = await client.GetStringAsync(commentsUrl);
-                var comments = JsonConvert.DeserializeObject<List<CommentDto>>(commentsResponse);
-                ViewBag.Comments = new SelectList(comments, "Id", "Name", assignment.Comments.Select(x=>x.CommentId));
+                ////Comments
+                //var commentsUrl = $"{baseUrl}api/comments";
+                //var commentsResponse = await client.GetStringAsync(commentsUrl);
+                //var comments = JsonConvert.DeserializeObject<List<CommentDto>>(commentsResponse);
+                //ViewBag.Comments = new SelectList(comments, "Id", "Name", assignment.Comments.Select(x=>x.CommentId));
                 return View(assignment);
             }
         }
@@ -80,6 +80,10 @@ namespace Task.Manager.AdminWeb.Controllers
         {
             using (var client = new HttpClient())
             {
+                if (assignmentDto.Status=="Inactive" || assignmentDto.Status == "Completed")
+                {
+                    assignmentDto.WorkerId = null;
+                }
                 var assignmentsUrl = $"{baseUrl}api/assignments/{assignmentDto.AssignmentId}";
                 var assignmentDtoString = JsonConvert.SerializeObject(assignmentDto);
                 var assignmentsResponse = await client.PutAsync(assignmentsUrl, new StringContent(assignmentDtoString,Encoding.UTF8, "application/json"));
@@ -95,7 +99,7 @@ namespace Task.Manager.AdminWeb.Controllers
                     ModelState.AddModelError(string.Empty,"Update failed");
                 }
                
-                return View(assignmentDto);
+                return RedirectToAction("Index","Projects");
             }
         }
 
@@ -120,6 +124,10 @@ namespace Task.Manager.AdminWeb.Controllers
         {
             using (var client = new HttpClient())
             {
+                if (assignmentDto.WorkerId==0)
+                {
+                    assignmentDto.WorkerId = null;
+                }
                 var assignmentUrl = $"{baseUrl}api/assignments/";
                 var assignmentDtoString = JsonConvert.SerializeObject(assignmentDto);
                 var assignmentResponse = await client.PostAsync(assignmentUrl,
@@ -144,6 +152,15 @@ namespace Task.Manager.AdminWeb.Controllers
             var projects = JsonConvert.DeserializeObject<List<ProjectDto>>(projectsResponse);
            
             return projects;
+        }
+
+        private async Task<List<WorkerDto>> deserializeWorkerDtos(HttpClient client)
+        {
+            var workersUrl = $"{baseUrl}api/workers";
+            var workersResponse = await client.GetStringAsync(workersUrl);
+            var workers = JsonConvert.DeserializeObject<List<WorkerDto>>(workersResponse);
+
+            return workers;
         }
     }
 }

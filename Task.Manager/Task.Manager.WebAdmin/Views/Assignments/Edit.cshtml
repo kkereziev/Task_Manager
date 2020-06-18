@@ -1,7 +1,39 @@
-﻿
+﻿@model AssignmentDto
 @{
     ViewData["Title"] = "Edit";
 }
 
 <h1>Edit</h1>
 
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()     <input type="hidden" asp-for="AssignmentId" />
+
+    <div class="form-group">
+        <label asp-for="Title">
+        </label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <select asp-for="Status" class="form-control">
+            <option>Active</option>
+            <option>Inactive</option>
+            <option>Completed</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="WorkerId"></label>Worker <select asp-for="WorkerId"
+                                                         asp-items="ViewBag.Workers" class="form-control">
+            <option></option>
+        </select>
+    </div>
+    <div style="display: none;" class="form-group">
+        <label asp-for="ProjectId" type="hidden"></label>
+        <select type="hidden" asp-for="ProjectId" asp-items="ViewBag.Projects" multiple class="form-control"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

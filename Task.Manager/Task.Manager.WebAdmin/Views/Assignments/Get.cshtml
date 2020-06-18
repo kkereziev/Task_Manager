@@ -25,40 +25,51 @@
     </style>
 </head>
 <body>
-<a style="float:right" class="btn btn-info" asp-action="Edit" asp-route-id="@Model.AssignmentId">Edit assignment</a>
+<a style="float:right" class="btn btn-info" asp-action="Edit" asp-route-id="@Model.AssignmentId" asp-route-projectId="@Model.ProjectId" >Edit assignment</a>
 <h2 style="text-align: left">Name: @Model.Title</h2>
 
 <div class="row book-panel">
     <div class="col-sm-6">
-        <p>Worker: <a asp-action="Get" asp-controller="Workers" asp-route-id="@Model.Worker.WorkerId">@Model.Worker.Name</a></p>
+        @if (@Model.Worker!=null)
+        {
+            <p>Worker: <a asp-action="Get" asp-controller="Workers" asp-route-id="@Model.Worker.WorkerId">@Model.Worker.Name</a></p>
+        }
+        else
+        {
+            <p>Worker: Not assigned</p>
+        }
         <p>Project: <a asp-action="Get" asp-controller="Projects" asp-route-id="@Model.Project.ProjectId">@Model.Project.Name</a></p>
         <p>Status: @Model.Status</p>
     </div>
     
 </div>
-<div class="row">
-    <div class="col-sm-6">
-        <h2 style="text-align: left">Comments:</h2>
-        @foreach (var g in Model.Comments)
-        {
-            <p></p>
-            <form action="#" method="post">
-                <div contenteditable="false" style="color: black; ">
-                    <br><span >By: @g.Worker.Name</span>
-                    <br />
-                    <br>@g.Description
-                    <br>
-                    <br/><span style="text-align: right; color: black">@g.AddedOn</span>
-                </div>
-                <a style="float:left" class="btn btn-primary" asp-controller="Comments" asp-action="Edit" asp-route-id="@g.CommentId"asp-route-assignmentId="@Model.AssignmentId" asp-route-workerId="@Model.WorkerId">Edit</a>
-            </form>
-            <hr style="width:50%;text-align:left;margin-left:0">
-        }
+@if (Model.Status == "Active")
+{
+    <div class="row">
+        <div class="col-sm-6">
+            <h2 style="text-align: left">Comments:</h2>
+            @foreach (var g in Model.Comments)
+            {
+                <p></p>
+                <form action="#" method="post">
+                    <div contenteditable="false" style="color: black; ">
+                        <br><span >By: @g.Worker.Name</span>
+                        <br />
+                        <br>@g.Description
+                        <br>
+                        <br/><span style="text-align: right; color: black">@g.AddedOn</span>
+                    </div>
+                    <a style="float:left" class="btn btn-primary" asp-controller="Comments" asp-action="Edit" asp-route-id="@g.CommentId"asp-route-assignmentId="@Model.AssignmentId" asp-route-workerId="@Model.WorkerId">Edit</a>
+                    <a style="float:left" class="btn btn-primary" asp-controller="Comments" asp-action="Delete" asp-route-id="@g.CommentId" >Delete</a>
+                </form>
+                <hr style="width:50%;text-align:left;margin-left:0">
+            }
 
+        </div>
     </div>
-</div>
-<p></p>
-<a style="float:left" class="btn btn-primary" asp-controller="Comments" asp-action="Create" asp-route-assignmentId="@Model.AssignmentId" asp-route-workerId="@Model.WorkerId">Add comment</a>
+    <p></p>
+    <a style="float:left" class="btn btn-primary" asp-controller="Comments" asp-action="Create" asp-route-assignmentId="@Model.AssignmentId" asp-route-workerId="@Model.WorkerId">Add comment</a>
+}
 
 </body>
 </html>
