@@ -67,7 +67,7 @@ namespace Task.Manager.WebAdmin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create(int assignmentId, int workerId)
+        public async Task<IActionResult> Create(int assignmentId, int projectId)
         {
             using (var client = new HttpClient())
             {
@@ -76,11 +76,11 @@ namespace Task.Manager.WebAdmin.Controllers
                 assignment.Add(assignments.Result.FirstOrDefault(x=>x.AssignmentId== assignmentId));
                 ViewBag.Assignments = new SelectList(assignment, "AssignmentId", "Title");
                 
-                var workers = deserializeWorkerDtos(client);
-                var worker=new List<WorkerDto>();
-                worker.Add(workers.Result.FirstOrDefault(x=>x.WorkerId==workerId));
-
-                ViewBag.Workers = new SelectList(worker, "WorkerId", "Name");
+                var projects = deserializeProjectDtos(client);
+                var workers=new List<WorkerDto>();
+                var project = projects.Result.FirstOrDefault(x => x.ProjectId == projectId);
+                workers.AddRange(project.Workers);
+                ViewBag.Workers = new SelectList(workers, "WorkerId", "Name");
                 
                 return View(new CommentDto());
             }
@@ -143,6 +143,14 @@ namespace Task.Manager.WebAdmin.Controllers
             var workers = JsonConvert.DeserializeObject<List<WorkerDto>>(workersResponse);
             
             return workers;
+        }
+
+        private async Task<List<ProjectDto>> deserializeProjectDtos(HttpClient client)
+        {
+            var projectsUrl = $"{baseUrl}api/projects";
+            var projectsResponse = await client.GetStringAsync(projectsUrl);
+            var projects = JsonConvert.DeserializeObject<List<ProjectDto>>(projectsResponse);
+            return projects;
         }
     }
 }

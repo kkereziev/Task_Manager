@@ -15,6 +15,18 @@ namespace Task.Manager.Api.Data
         {
         }
 
+
+        public DbSet<Project> Projects { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
+
+        public DbSet<Assignment> Assignments { get; set; }
+
+        public DbSet<Worker> Workers { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Assignment>(t =>
@@ -51,16 +63,5 @@ namespace Task.Manager.Api.Data
                 r.HasMany(w => w.Workers).WithOne(r => r.Role).HasForeignKey(r => r.RoleId);
             });
         }
-
-
-        public DbSet<Project> Projects { get; set; }
-
-        public DbSet<Role> Roles { get; set; }
-
-        public DbSet<Assignment> Assignments { get; set; }
-
-        public DbSet<Worker> Workers { get; set; }
-
-        public DbSet<Comment> Comments { get; set; }
     }
 }

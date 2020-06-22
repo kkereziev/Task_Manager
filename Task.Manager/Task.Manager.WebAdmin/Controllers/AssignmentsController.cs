@@ -66,11 +66,6 @@ namespace Task.Manager.AdminWeb.Controllers
                 worker.AddRange(project[0].Workers);
                 ViewBag.Workers = new SelectList(worker, "WorkerId", "Name");
 
-                ////Comments
-                //var commentsUrl = $"{baseUrl}api/comments";
-                //var commentsResponse = await client.GetStringAsync(commentsUrl);
-                //var comments = JsonConvert.DeserializeObject<List<CommentDto>>(commentsResponse);
-                //ViewBag.Comments = new SelectList(comments, "Id", "Name", assignment.Comments.Select(x=>x.CommentId));
                 return View(assignment);
             }
         }
